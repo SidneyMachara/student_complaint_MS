@@ -20,6 +20,7 @@ class SysAdminController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware(['role:sys_admin']);
     }
 
     public function index()
