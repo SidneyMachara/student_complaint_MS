@@ -1,0 +1,46 @@
+
+
+.header-bg{
+  background-image: linear-gradient(to right, #243949 0%, #517fa4 100%);
+}
+
+.side-nav-ul >li {
+  background-color:#f8f9fa;
+  color: #8795a1 !important;
+}
+
+.side-nav-ul >li >a{
+  color: #8795a1;
+}
+.side-nav-ul >li >a:hover{
+  color: #3490dc;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.new-complaint-btn{
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+   color: #ffffff;
+   background-color: #3490dc;
+   border-radius: 50px;
+}
+
+.complain-type{
+  border-radius: 50px;
+  border: 1px solid red;
+  color: red;
+  /* padding: 10px; */
+}
+
+.mini-complain-card:hover{
+  cursor: pointer;
+  background-color: #eeeeee;
+}
+.mini-complain-card h5 > a{
+  color: black;
+  text-decoration: none;
+}
+
+table > thead > tr > th {
+  color: #3490dc ;
+}
