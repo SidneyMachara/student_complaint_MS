@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Complaint;
+use Auth;
+
 class LecturerController extends Controller
 {
 
@@ -26,6 +29,15 @@ class LecturerController extends Controller
 
     public function complaints()
     {
-      return view('lecturer.complaints');
+
+      $complaints = Complaint::where('lecturer_id', Auth::user()->lecturer->id)->get();
+      return view('lecturer.complaints',compact('complaints'));
+    }
+
+    public function show($complaint_id)
+    {
+
+      $complaint = Complaint::find($complaint_id);
+      return view('lecturer.show',compact('complaint'));
     }
 }

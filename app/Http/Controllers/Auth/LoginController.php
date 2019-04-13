@@ -44,7 +44,7 @@ class LoginController extends Controller
       if(Auth::user()->user_type == config('const.user_type.sys_admin')) {
         return '/sys_admin';
       }else if(Auth::user()->user_type == config('const.user_type.student')) {
-        return '/student/complaints/all';
+        return '/student/complaints';
       }else if(Auth::user()->user_type == config('const.user_type.lecturer')) {
         return '/lecturer';
       }

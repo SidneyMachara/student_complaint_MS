@@ -24,6 +24,7 @@
                 @endforeach
               </tbody>
             </table>
+
           </div>
       </div>
 
@@ -50,6 +51,7 @@
               </tr>
             </tbody>
           </table>
+          
         </div>
       </div>
     </div>
@@ -74,6 +76,7 @@
                 @endforeach
               </tbody>
             </table>
+            {{ $courses->links() }}
           </div>
       </div>
     </div>

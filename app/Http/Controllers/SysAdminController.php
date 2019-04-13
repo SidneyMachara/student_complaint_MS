@@ -47,6 +47,8 @@ class SysAdminController extends Controller
       $user->user_type = config('const.user_type.student');
       $user->save();
 
+      $user->assignRole('student');
+
       $student = new Student;
       $student->user_id = $user->id;
       $student->student_id = $request->studentId;
@@ -74,6 +76,8 @@ class SysAdminController extends Controller
       $user->user_type = config('const.user_type.lecturer');
       $user->save();
 
+       $user->assignRole('lecturer');
+
       $lecturer = new Lecturer;
       $lecturer->user_id = $user->id;
       $lecturer->lecturer_id = $request->lecturerId;
@@ -84,7 +88,7 @@ class SysAdminController extends Controller
 
     public function config()
     {
-      $courses = Course::all();
+      $courses = Course::paginate(6);
       $lecturers = Lecturer::all();
       $grade_handers = ComplaintHandler::where('complaint_type', config('const.complaint_type.grade'))->get();
       $lecturer_handers = ComplaintHandler::where('complaint_type', config('const.complaint_type.lecturer'))->get();
@@ -99,6 +103,7 @@ class SysAdminController extends Controller
       $course->course_code = $request->course_code;
       $course->save();
 
+      $request->session()->flash('success', 'Task was successful!');
       return redirect()->back();
     }
 

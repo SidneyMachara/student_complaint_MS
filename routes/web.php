@@ -14,9 +14,7 @@
 Route::get('/', 'Auth\LoginController@showLoginForm');
 Route::get('/logout', 'Auth\LoginController@logout'); //TODO : remove me
 
-Route::get('/note', function () {
-    return view('note');
-})->name('note');
+
 
 Auth::routes();
 
@@ -38,14 +36,19 @@ Route::prefix('/sys_admin')->group(function () {
 });
 
 Route::prefix('/student')->group(function () {
-    Route::get('/complaints/all', 'StudentComplaintController@index')->name('student.allComplaints');
+    Route::get('/complaints', 'StudentComplaintController@index')->name('student.allComplaints');
     Route::get('/complaints/{complaint_id}', 'StudentComplaintController@show')->name('student.showComplaint');
     Route::get('/complaints/lectures', 'StudentComplaintController@index')->name('student.lecturesComplaints');
     Route::get('/complaints/grades', 'StudentComplaintController@index')->name('student.gradesComplaints');
+
+    Route::post('/complaints', 'StudentComplaintController@store_complaint')->name('student.store_complaint');
+
+    Route::get('/note', 'StudentComplaintController@note')->name('note');
 });
 
 Route::prefix('/lecturer')->group(function () {
     Route::get('/', 'LecturerController@index')->name('lecturer.index');
     Route::get('/complaints', 'LecturerController@complaints')->name('lecturer.complaints');
+    Route::get('/complaints/{complaint_id}', 'LecturerController@show')->name('lecturer.showComplaints');
     Route::get('/profile', 'LecturerController@profile')->name('lecturer.profile');
 });

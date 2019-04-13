@@ -9,8 +9,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -56,5 +54,70 @@
             </div>
         </main>
     </div>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.js" data-turbolinks-track="true"></script>
+    <script src="{{ asset('js/bootstrap-notify.js') }}" ></script>
+
+    <script>
+            $(function () {
+                @if(Session::has('success'))
+  // alert('k');
+                @php
+                    $str = 'success';
+                    // $str = 'web.'.Session::get('success');
+
+                @endphp
+                $.notify({
+                    title: 'Success',
+                    message: '{{ $str }}'
+                },{
+                    type: 'success',
+                    timer: 2000,
+                    z_index: 10000,
+                    // animate: {
+                    //     enter: 'animated fadeInDown',
+                    //     exit: 'animated fadeOutUp'
+                    // },
+                    allow_dismiss: true
+                });
+                @endif
+                @if(Session::has('error'))
+                @php
+                    $str = 'web.'.Session::get('error');
+                @endphp
+                $.notify({
+                    title: 'Error',
+                    message: '{{ $str }}'
+                },{
+                    type: 'danger',
+                    timer: 2000,
+                    z_index: 10000,
+                    // animate: {
+                    //     enter: 'animated fadeInDown',
+                    //     exit: 'animated fadeOutUp'
+                    // },
+                    allow_dismiss: true
+                });
+                @endif
+            });
+
+            function notify(message, type)
+            {
+                $.notify({
+                    message: message
+                },{
+                    type: type,
+                    timer: 2000,
+                    z_index: 10000,
+                    // animate: {
+                    //     enter: 'animated fadeInDown',
+                    //     exit: 'animated fadeOutUp'
+                    // },
+                    allow_dismiss: true
+                });
+            }
+        </script>
 </body>
 </html>

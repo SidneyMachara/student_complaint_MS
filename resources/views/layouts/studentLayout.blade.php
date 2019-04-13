@@ -9,8 +9,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -52,13 +51,13 @@
 
                   <ul class="list-group mt-5 side-nav-ul">
                     <li class="list-group-item border-0"  >
-                      <a href="{{ route('student.allComplaints') }}"><i class="fa fa-question mr-2"></i>All Complaints</a>
+                      <a href="{{ route('student.allComplaints') }}" class="{{ isActiveRouteA(['student.allComplaints']) }}"><i class="fa fa-question mr-2 "></i>All Complaints</a>
                     </li>
                     <li class="list-group-item border-0">
-                      <a href="#"><i class="fa fa-times mr-2"></i>Unsolved Complaints</a>
+                      <a href="#"><i class="fa fa-times mr-2" class="{{ isActiveRouteA(['student']) }}"></i>Unsolved Complaints</a>
                     </li>
                     <li class="list-group-item border-0">
-                      <a href="#"><i class="fa fa-check-circle mr-2"></i>Solved Complaints</a>
+                      <a href="#"><i class="fa fa-check-circle mr-2" class="{{ isActiveRouteA(['student']) }}"></i>Solved Complaints</a>
                     </li>
                   </ul>
               </div>
@@ -73,5 +72,9 @@
         </main>
     </div>
     @include('student.complaints.create')
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" ></script>
+    <script src="{{ asset('js/bootstrap-notify.js') }}" ></script>
 </body>
 </html>

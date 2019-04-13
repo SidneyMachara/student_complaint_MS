@@ -17,6 +17,7 @@ class CreateComplaintsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('student_id');
             $table->integer('lecturer_id');
+            $table->integer('course_id');
             $table->integer('complaint_type');
             $table->integer('status');
             $table->string('title');

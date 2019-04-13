@@ -7,3 +7,11 @@ if (! function_exists('isActiveRoute')) {
         return $style;
     }
 }
+
+if (! function_exists('isActiveRouteA')) {
+    function isActiveRouteA($route_array, $class ='active-link')
+    {
+        if (in_array(Route::currentRouteName(),$route_array))
+        return $class;
+    }
+}

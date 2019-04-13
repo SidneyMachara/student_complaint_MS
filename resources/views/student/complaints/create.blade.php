@@ -10,43 +10,84 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-        <form class="" action="{{ route('sys_admin.store_student') }}" method="post">
+        <form class="" action="{{ route('student.store_complaint') }}" method="post" enctype="multipart/form-data">
           @csrf
           <div class="row">
             <div class="col-md-6 col-6">
-                <input type="radio" name="" value="1">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="complaint_type" id="complaint_type1" value="{{ config('const.complaint_type.lecturer') }}" required>
+                <label class="form-check-label" for="complaint_type1">
+                  Lecturer
+                </label>
+              </div>
             </div>
             <div class="col-md-6 col-6">
-              <input type="radio" name="" value="1">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="complaint_type" id="complaint_type2" value="{{ config('const.complaint_type.grade') }}" >
+                <label class="form-check-label" for="complaint_type2">
+                  Grade
+                </label>
+              </div>
             </div>
           </div>
 
-          <div class="row mt-2">
-            <div class="col-md-6 col-12">
+          <div class="row mt-3">
+            <div class="col-md-12 col-12">
               <div class="form-group">
-               <label for="fullName">Subject</label>
-               <input type="text" name="Subject" class="form-control" id="Subject" aria-describedby="Subject" placeholder="Enter Full-Name">
-             </div>
-            </div>
-            <div class="col-md-6 col-12">
-              <div class="form-group">
-               <label for="studentId">Lecturer</label>
-               <input type="number" name="studentId" class="form-control" id="studentId" aria-describedby="studentId" placeholder="Enter Student Id">
+               <label for="title">Title</label>
+               <input type="text" class="form-control" name="title" id="title" placeholder="Short Desciptive title">
              </div>
             </div>
           </div>
 
-          <div class="row">
+          <div class="row mt-4">
+            <div class="col-md-6 col-12">
+              <div class="form-group">
+                <label for="course">Course</label>
+                <select class="form-control" id="course" name="course_id" required>
+                  <option selected>Select</option>
+                  @foreach ($courses as $course)
+                    <option value="{{$course->id}}">{{ $course->course_code }}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-12">
+              <div class="form-group">
+                <label for="lecturer">Lecturer</label>
+                <select class="form-control" id="lecturer" name="lecturer_id" required>
+                  <option selected>Select</option>
+                  @foreach ($lecturers as $lecturer)
+                    <option value="{{$lecturer->id}}">{{ $lecturer->user->name }}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+
+
+
+          <div class="row p-2">
             <div class="col-12 col-md-12">
-              <textarea name="name" rows="5" cols="63"></textarea>
+              <div class="form-group">
+               <label for="complain">Decribe your complain in full: <small class="text-danger">Use proper english</small></label>
+               <textarea name="body"  class="form-control" id="complain" rows="5" cols="60"></textarea>
+             </div>
+
             </div>
           </div>
 
-          <div class="row">
-            <input type="file" name="" value="">
+          <div class="row p-3">
+            <div class="col-md-12 col-12">
+              <input type="file" name="c_files[]" multiple="" value="">
+            </div>
           </div>
+          <br>
 
-          <input type="submit" name="" value="SAVE" class="btn btn-success float-right">
+            <input type="submit" name="" value="SAVE" class="btn btn-success float-right">
+
+
+
 
         </form>
       </div>

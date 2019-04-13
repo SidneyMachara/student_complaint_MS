@@ -10,5 +10,10 @@ return [
   'complaint_type' => [
     'lecturer' => 1,
     'grade'    => 2
+  ],
+
+  'complaint_status' => [
+    'unsolved' => 0,
+    'solved'    => 1
   ]
 ];

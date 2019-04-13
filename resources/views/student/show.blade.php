@@ -13,7 +13,7 @@
               <img src="{{  asset('assets/l.jpg') }}" class="rounded-circle" alt="" width="60" height="60">
             </div>
             <div class="col-md-6 my-auto pl-5">
-              <h5 class="font-weight-bold mb-1  my-auto">{{ mb_strimwidth("This is the title how long can i get without distubin the procel of the human race is this", 0, 30, " ...")}}</h5>
+              <h5 class="font-weight-bold mb-1  my-auto">{{ mb_strimwidth($complaint->student->user->name, 0, 30, " ...")}}</h5>
               <small class="pt-0  my-auto font-weight-bold">
               10-10-10
               </small>
@@ -25,33 +25,48 @@
               </small>
             </div>
             <div class="col-md-2  my-auto">
-              <small class="complain-type pl-3 pr-3 pt-1 pb-1 ">LECTURE</small>
+              @if ($complaint->complaint_type == config('const.complaint_type.lecturer'))
+                <small class="complain-type-l pl-3 pr-3 pt-1 pb-1 ">LECTURE</small>
+              @else
+                <small class="complain-type-g pl-3 pr-3 pt-1 pb-1 ">GRADE</small>
+              @endif
+
             </div>
           </div>
 
           <div class="row mt-1 justify-content-end">
             <div class="col-md-11 ">
-              <h5 class="font-weight-bold mb-1  my-auto alert" style="background-color: #ecf3fc">{{ mb_strimwidth("This is the title how long can i get without distubin the procel of the human race is this", 0, 50, " ...")}}</h5>
+              <h5 class="font-weight-bold mb-1  my-auto alert" style="background-color: #ecf3fc">{{ $complaint->title }}</h5>
             </div>
           </div>
 
           <div class="row mt-4 justify-content-end">
             <div class="col-md-11 ">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-                in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                 occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
-                  id est laborum.</p>
+              <p>
+                {{ $complaint->body }}
+              </p>
             </div>
           </div>
+
+          @foreach ($complaint->complaint_attachments->chunk(4) as $chunk)
+            <div class="row justify-content-end mt-3 pb-3">
+              @foreach ($chunk as $attachment)
+                <div class="col-md-3 col-6">
+                  <img src="{{ asset('/complaint_files/'.$attachment->attachment) }}" class="img-thumbnail"  alt="">
+                </div>
+              @endforeach
+            </div>
+
+          @endforeach
+
 
         </div>
       </div>
 
-      <div class="col-md-2 col-12 ">
-
+      <div class="col-md-2 col-12">
+        <form class="" method="post">
+          <input type="submit" class="btn mx-auto d-table escalate  pl-4 pr-4"  name="" value="ESCALATE">
+        </form>
       </div>
 
     </div>
