@@ -52,4 +52,6 @@ Route::prefix('/lecturer')->group(function () {
     Route::get('/complaints', 'LecturerController@complaints')->name('lecturer.complaints');
     Route::get('/complaints/{complaint_id}', 'LecturerController@show')->name('lecturer.showComplaints');
     Route::get('/profile', 'LecturerController@profile')->name('lecturer.profile');
+
+    Route::post('/complaints/reply', 'LecturerController@reply')->name('lecturer.reply');
 });

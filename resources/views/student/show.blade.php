@@ -11,7 +11,7 @@
         <div class="card-body p-4 rounded mini-complain-card">
           <div class="row ">
             <div class="col-md-1 ">
-              <img src="{{  asset('assets/l.jpg') }}" class="rounded-circle" alt="" width="60" height="60">
+              <img src="{{  asset('assets/avatar3.png') }}" class="rounded-circle" alt="" width="60" height="60">
             </div>
             <div class="col-md-6 my-auto pl-5">
               <h5 class="font-weight-bold mb-1  my-auto">{{ mb_strimwidth($complaint->student->user->name, 0, 30, " ...")}}</h5>
@@ -69,7 +69,11 @@
             <div class="card-body p-4 rounded mini-complain-card">
               <div class="row ">
                 <div class="col-md-1 ">
-                  <img src="{{  asset('assets/l.jpg') }}" class="rounded-circle" alt="" width="60" height="60">
+                  @if ($complaint_reply->user->user_type == config('const.user_type.student'))
+                    <img src="{{  asset('assets/avatar3.png') }}" class="rounded-circle" alt="" width="60" height="60">
+                  @else
+                    <img src="{{  asset('assets/avatar04.png') }}" class="rounded-circle" alt="" width="60" height="60">
+                  @endif
                 </div>
                 <div class="col-md-11 my-auto pl-5">
                   <h5 class="font-weight-bold mb-1  my-auto">{{ mb_strimwidth($complaint->student->user->name, 0, 30, " ...")}}</h5>
@@ -82,7 +86,7 @@
               </div>
 
               <div class="row mt-4 justify-content-end">
-                <div class="col-md-11 ">
+                <div class="col-md-11">
                   <p>
                     {{ $complaint_reply->body }}
                   </p>
@@ -104,6 +108,7 @@
             </div>
           @endforeach
         {{--/. replies --}}
+          {{ $complaint_replies->links() }}
       </div>
 
       <div class="col-md-2 col-12">

@@ -95,7 +95,7 @@ class StudentComplaintController extends Controller
       $courses = Course::all();
       $lecturers = Lecturer::all();
       $complaint = Complaint::find($complaint_id);
-      $complaint_replies = ComplaintReply::where('complaint_id',$complaint_id)->paginate(15);
+      $complaint_replies = ComplaintReply::where('complaint_id',$complaint_id)->paginate(10);
 
       return view('student.show',compact('courses','lecturers','complaint','complaint_replies'));
     }
