@@ -42,6 +42,7 @@ Route::prefix('/student')->group(function () {
     Route::get('/complaints/grades', 'StudentComplaintController@index')->name('student.gradesComplaints');
 
     Route::post('/complaints', 'StudentComplaintController@store_complaint')->name('student.store_complaint');
+    Route::post('/complaints/reply', 'StudentComplaintController@reply')->name('student.reply');
 
     Route::get('/note', 'StudentComplaintController@note')->name('note');
 });

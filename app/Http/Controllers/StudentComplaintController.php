@@ -8,6 +8,7 @@ use App\Course;
 use App\Lecturer;
 use App\Complaint;
 use App\ComplaintAttachment;
+use App\ComplaintReply;
 
 use Auth;
 
@@ -94,7 +95,20 @@ class StudentComplaintController extends Controller
       $courses = Course::all();
       $lecturers = Lecturer::all();
       $complaint = Complaint::find($complaint_id);
+      $complaint_replies = ComplaintReply::where('complaint_id',$complaint_id)->paginate(15);
 
-      return view('student.show',compact('courses','lecturers','complaint'));
+      return view('student.show',compact('courses','lecturers','complaint','complaint_replies'));
+    }
+
+    public function reply(Request $request)
+    {
+      $reply = new ComplaintReply;
+      $reply->complaint_id = $request->complaint_id;
+      $reply->user_id = Auth::user()->id;
+      $reply->reply_to = -1;
+      $reply->body = $request->body;
+      $reply->save();
+
+      return redirect()->back();
     }
 }
