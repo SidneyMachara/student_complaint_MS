@@ -15,5 +15,10 @@ return [
   'complaint_status' => [
     'unsolved' => 0,
     'solved'    => 1
+  ],
+
+  'is_active' => [
+    'true' => 1,
+    'false' => 0
   ]
 ];

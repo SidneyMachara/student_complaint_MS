@@ -60,7 +60,7 @@
               </div>
 
               <div class="row mt-4 justify-content-end">
-                <div class="col-md-11 ">
+                <div class="col-md-11 pl-5">
                   <p>
                     {{ $complaint->body }}
                   </p>

@@ -26,6 +26,18 @@
                 </select>
               </div>
             </div>
+
+            <div class="col-md-6 col-12">
+              <div class="form-group">
+                <label for="position_id">Select Position</label>
+                <select class="form-control" id="position_id" name="position_id" required>
+                  <option value="" selected disabled>-----</option>
+                  @foreach ($positions as $position)
+                    <option value="{{ $position->id }}">{{ $position->title }}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
           </div>
 
 

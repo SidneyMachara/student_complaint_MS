@@ -99,6 +99,11 @@ textarea {
    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
+ .modal-content{
+   padding: 20px;
+  border-radius: 20px;
+}
+
 textarea:focus,
 textarea.form-control:focus,
 input.form-control:focus,

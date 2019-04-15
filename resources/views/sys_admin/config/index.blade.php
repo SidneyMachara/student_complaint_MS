@@ -13,6 +13,7 @@
                 <tr>
                   <th>Level</th>
                   <th>Handler</th>
+                  <th>Position title</th>
                 </tr>
               </thead>
               <tbody>
@@ -20,6 +21,7 @@
                   <tr>
                     <td>{{ $grade_hander->level }}</td>
                     <td>{{ $grade_hander->lecturer->user->name }}</td>
+                    <td>{{ $grade_hander->position->title }}</td>
                   </tr>
                 @endforeach
               </tbody>
@@ -38,6 +40,7 @@
                 {{-- <th>#</th> --}}
                 <th>Level</th>
                 <th>Handler</th>
+                <th>Position title</th>
               </tr>
             </thead>
             <tbody>
@@ -46,12 +49,13 @@
                   <tr>
                     <td>{{ $lecturer_hander->level }}</td>
                     <td>{{ $lecturer_hander->lecturer->user->name }}</td>
+                    <td>{{ $lecturer_hander->position->title }}</td>
                   </tr>
                 @endforeach
               </tr>
             </tbody>
           </table>
-          
+
         </div>
       </div>
     </div>
@@ -64,7 +68,7 @@
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>course</th>
+                  <th>Course</th>
                 </tr>
               </thead>
               <tbody>
@@ -79,10 +83,34 @@
             {{ $courses->links() }}
           </div>
       </div>
+      <div class="col-md-6 col-12">
+          <a href="#" class="btn new-complaint-btn pl-4 pt-2 pb-2 pr-4" data-toggle="modal" data-target="#add_position_modal"> ADD POSITION </a>
+          <div class="card-body">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Title</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($positions as $key => $position)
+                  <tr>
+                    <td>{{ $key }}</td>
+                    <td>{{ $position->title }}</td>
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
+
+          </div>
+      </div>
     </div>
 
   </div>
+
   @include('sys_admin.config.add_course')
   @include('sys_admin.config.add_grade_handler')
   @include('sys_admin.config.add_lecturer_handler')
+  @include('sys_admin.config.add_position')
 @endsection

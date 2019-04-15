@@ -42,7 +42,7 @@
           </div>
 
           <div class="row mt-4 justify-content-end">
-            <div class="col-md-11 ">
+            <div class="col-md-11 pl-5">
               <p>
                 {{ $complaint->body }}
               </p>
@@ -86,7 +86,7 @@
               </div>
 
               <div class="row mt-4 justify-content-end">
-                <div class="col-md-11">
+                <div class="col-md-11 pl-5">
                   <p>
                     {{ $complaint_reply->body }}
                   </p>
@@ -109,12 +109,32 @@
           @endforeach
         {{--/. replies --}}
           {{ $complaint_replies->links() }}
+
+
       </div>
 
       <div class="col-md-2 col-12">
-        <form class="" method="post">
+        <form class="" action="{{ route('student.escalate') }} "method="post">
+          @csrf
+          <input type="hidden" name="complaint_id" value="{{ $complaint->id }}">
+          <input type="hidden" name="complaint_type" value="{{ $complaint->complaint_type }}">
           <input type="submit" class="btn mx-auto d-table escalate  pl-4 pr-4"  name="" value="ESCALATE">
         </form>
+
+        <div class="">
+          @foreach ($history as $h)
+            {{-- {{dd($h)}} --}}
+            @if($h->complaint_handler_id == -1)
+              <i class="fa fa-arrow-up text-muted mx-auto d-table mt-2 mb-2"></i>
+              <p class="mx-auto d-table text-muted">{{ $h->lecturer->user->name}}</p>
+            @else
+              <i class="fa fa-arrow-up text-muted mx-auto d-table mt-2 mb-2"></i>
+              {{-- <p>g</p> --}}
+              <p class="mx-auto d-table text-muted">{{ $h->complaint_handler->position->title}}</p>
+            @endif
+
+          @endforeach
+        </div>
       </div>
 
     </div>

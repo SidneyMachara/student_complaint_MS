@@ -32,6 +32,7 @@ Route::prefix('/sys_admin')->group(function () {
     Route::get('/config', 'SysAdminController@config')->name('sys_admin.config');
     Route::post('/add_course', 'SysAdminController@add_course')->name('sys_admin.add_course');
     Route::post('/add_handler', 'SysAdminController@add_handler')->name('sys_admin.add_handler');
+    Route::post('/add_position', 'SysAdminController@add_position')->name('sys_admin.add_position');
 
 });
 
@@ -43,6 +44,8 @@ Route::prefix('/student')->group(function () {
 
     Route::post('/complaints', 'StudentComplaintController@store_complaint')->name('student.store_complaint');
     Route::post('/complaints/reply', 'StudentComplaintController@reply')->name('student.reply');
+    Route::post('/complaints/escalate', 'StudentComplaintController@escalate')->name('student.escalate');
+
 
     Route::get('/note', 'StudentComplaintController@note')->name('note');
 });

@@ -7,6 +7,7 @@ use App\User;
 use App\Student;
 use App\lecturer;
 use App\Course;
+use App\Position;
 use App\ComplaintHandler;
 use Illuminate\Support\Facades\Hash;
 
@@ -90,9 +91,10 @@ class SysAdminController extends Controller
     {
       $courses = Course::paginate(6);
       $lecturers = Lecturer::all();
+      $positions = Position::all();
       $grade_handers = ComplaintHandler::where('complaint_type', config('const.complaint_type.grade'))->get();
       $lecturer_handers = ComplaintHandler::where('complaint_type', config('const.complaint_type.lecturer'))->get();
-      return view('sys_admin.config.index',compact('courses','lecturers','grade_handers','lecturer_handers'));
+      return view('sys_admin.config.index',compact('courses','lecturers','grade_handers','lecturer_handers','positions'));
     }
 
     public function add_course(Request $request)
@@ -102,6 +104,17 @@ class SysAdminController extends Controller
       $course = new Course;
       $course->course_code = $request->course_code;
       $course->save();
+
+      $request->session()->flash('success', 'Task was successful!');
+      return redirect()->back();
+    }
+    public function add_position(Request $request)
+    {
+      //TODO : validate duplicate
+
+      $position = new Position;
+      $position->title = $request->position_title;
+      $position->save();
 
       $request->session()->flash('success', 'Task was successful!');
       return redirect()->back();
@@ -118,6 +131,7 @@ class SysAdminController extends Controller
           $handler->level = $highest_level == null ? 1: ($highest_level + 1);
           $handler->complaint_type = $request->complaint_type;
           $handler->lecturer_id = $request->lecturer_id;
+          $handler->position_id = $request->position_id;
           $handler->save();
 
           return redirect()->back();

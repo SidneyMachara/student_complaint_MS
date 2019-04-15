@@ -15,6 +15,10 @@ class CreateComplaintHistoriesTable extends Migration
     {
         Schema::create('complaint_histories', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('complaint_id');
+            $table->integer('lecturer_id');
+            $table->integer('complaint_handler_id')->default(-1); // starts -1 --> then is updated to complaint_hander_id as u escalate
+            $table->integer('is_active')->nullable(); //complaint hander
             $table->timestamps();
         });
     }

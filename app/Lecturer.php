@@ -15,4 +15,9 @@ class Lecturer extends Model
   {
     return $this->hasMany('App\ComplaintHandler');
   }
+
+  public function complaint_histories()
+  {
+    return $this->hasMany('App\ComplaintHistory');
+  }
 }

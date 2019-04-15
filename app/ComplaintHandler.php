@@ -10,4 +10,14 @@ class ComplaintHandler extends Model
     {
       return $this->belongsTo('App\Lecturer');
     }
+
+    public function complaint_histories()
+    {
+      return $this->hasMany('App\ComplaintHistory');
+    }
+
+    public function position()
+    {
+      return $this->belongsTo('App\Position');
+    }
 }
