@@ -15,4 +15,14 @@ class Complaint extends Model
     {
       return $this->hasMany('App\ComplaintAttachment');
     }
+
+    public function complaint_histories()
+    {
+      return $this->hasMany('App\ComplaintHistory');
+    }
+
+    public function complaint_replies()
+    {
+      return $this->hasMany('App\ComplaintReply');
+    }
 }

@@ -8,7 +8,7 @@
 
       <div class="col-md-10 col-12">
         {{-- complaint --}}
-        <div class="card-body p-4 rounded mini-complain-card">
+        <div class="card-body p-4 rounded mini-complain-card {{ $complaint->status == config('const.complaint_status.solved') ? 'solved-c' :''}}">
           <div class="row ">
             <div class="col-md-1 ">
               <img src="{{  asset('assets/avatar3.png') }}" class="rounded-circle" alt="" width="60" height="60">
@@ -76,7 +76,7 @@
                   @endif
                 </div>
                 <div class="col-md-11 my-auto pl-5">
-                  <h5 class="font-weight-bold mb-1  my-auto">{{ mb_strimwidth($complaint->student->user->name, 0, 30, " ...")}}</h5>
+                  <h5 class="font-weight-bold mb-1  my-auto">{{ mb_strimwidth($complaint_reply->user->name, 0, 30, " ...")}}</h5>
                   <small class="pt-0  my-auto font-weight-bold">
                    {{  \Carbon\Carbon::parse($complaint_reply->created_at)->format('j F, Y') }}
                   </small>
@@ -114,13 +114,25 @@
       </div>
 
       <div class="col-md-2 col-12">
-        <form class="" action="{{ route('student.escalate') }} "method="post">
-          @csrf
-          <input type="hidden" name="complaint_id" value="{{ $complaint->id }}">
-          <input type="hidden" name="complaint_type" value="{{ $complaint->complaint_type }}">
-          <input type="submit" class="btn mx-auto d-table escalate  pl-4 pr-4"  name="" value="ESCALATE">
-        </form>
 
+        @if ( !$complaint->status == config('const.complaint_status.solved'))
+
+          <form class="" action="{{ route('student.solved') }} " method="post">
+            @csrf
+            <input type="hidden" name="complaint_id" value="{{ $complaint->id }}">
+            <input type="submit" class="btn mx-auto d-table  pl-4 pr-4 solved-btn mb-3"  name="" value="SOLVED">
+          </form>
+
+
+          <form class="" action="{{ route('student.escalate') }} "method="post">
+            @csrf
+            <input type="hidden" name="complaint_id" value="{{ $complaint->id }}">
+            <input type="hidden" name="complaint_type" value="{{ $complaint->complaint_type }}">
+            <input type="submit" class="btn mx-auto d-table escalate  pl-4 pr-4"  name="" value="ESCALATE">
+          </form>
+        @else
+          <input type="submit" class="btn mx-auto d-table  pl-4 pr-4 solved-btn mb-3" disabled  name="" value="SOLVED">
+        @endif
         <div class="">
           @foreach ($history as $h)
             {{-- {{dd($h)}} --}}

@@ -26,7 +26,7 @@
 
           <div class="col-md-10 col-12">
             {{-- complaint --}}
-            <div class="card-body p-4 rounded mini-complain-card">
+            <div class="card-body p-4 rounded mini-complain-card {{ $complaint->status == config('const.complaint_status.solved') ? 'solved-c' :''}}">
               <div class="row ">
                 <div class="col-md-1 ">
                   <img src="{{  asset('assets/avatar3.png') }}" class="rounded-circle" alt="" width="60" height="60">
@@ -130,6 +130,26 @@
           </div>
 
           <div class="col-md-2 col-12">
+
+            @if ( !$complaint->status == config('const.complaint_status.solved'))
+
+            @else
+              <input type="submit" class="btn mx-auto d-table  pl-4 pr-4 solved-btn mb-3" disabled  name="" value="SOLVED">
+            @endif
+            <div class="">
+              @foreach ($history as $h)
+                {{-- {{dd($h)}} --}}
+                @if($h->complaint_handler_id == -1)
+                  <i class="fa fa-arrow-up text-muted mx-auto d-table mt-2 mb-2"></i>
+                  <p class="mx-auto d-table text-muted">{{ $h->lecturer->user->name}}</p>
+                @else
+                  <i class="fa fa-arrow-up text-muted mx-auto d-table mt-2 mb-2"></i>
+                  {{-- <p>g</p> --}}
+                  <p class="mx-auto d-table text-muted">{{ $h->complaint_handler->position->title}}</p>
+                @endif
+
+              @endforeach
+            </div>
 
           </div>
 

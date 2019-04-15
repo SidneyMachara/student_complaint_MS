@@ -30,6 +30,10 @@
    background-color: #3490dc;
    border-radius: 50px;
 }
+.new-complaint-btn:hover{
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+
+}
 .not-spotlight-btn{
    color: black;
    background-color: #ffffff;
@@ -59,6 +63,15 @@
   text-decoration: none;
 }
 
+.solved-c{
+  background-color: #f1f8e9;
+  border: 1px solid #dcedc8 ;
+}
+.solved-c:hover{
+  background-color:#dcedc8 !important;
+
+}
+
 table > thead > tr > th {
   color: #3490dc ;
 }
@@ -74,7 +87,7 @@ table > thead > tr > th {
   background-color: #3490dc;
   color: #ffffff;
   border: 1px solid #3490dc;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
 .reply-btn{
@@ -102,6 +115,17 @@ textarea {
  .modal-content{
    padding: 20px;
   border-radius: 20px;
+}
+
+.solved-btn{
+  border-radius: 50px;
+  background-color: #dcedc8;
+  border: 1px solid #9ccc65
+}
+.solved-btn:hover{
+  font-weight: bold;
+   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  background-color: #dcedc8;
 }
 
 textarea:focus,

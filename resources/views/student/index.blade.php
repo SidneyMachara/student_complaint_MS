@@ -30,8 +30,8 @@
             </div>
             <div class="col-md-2 my-auto">
               <small class="d-table ml-auto">
-                <i class="text-muted fa fa-eye mr-1"></i> 1
-                <i class="text-muted fa fa-comment-dots mr-1 ml-3"></i> 1
+                <i class="text-muted fa fa-eye mr-1"></i> {{ count($complaint->complaint_histories) }}
+                <i class="text-muted fa fa-comment-dots mr-1 ml-3"></i> {{ count($complaint->complaint_replies) }}
               </small>
             </div>
             <div class="col-md-2  my-auto">

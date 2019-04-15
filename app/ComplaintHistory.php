@@ -16,4 +16,9 @@ class ComplaintHistory extends Model
     {
       return $this->belongsTo('App\ComplaintHandler');
     }
+
+    public function complaint()
+    {
+      return $this->belongsTo('App\Complaint');
+    }
 }

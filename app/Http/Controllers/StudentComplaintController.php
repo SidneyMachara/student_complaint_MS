@@ -158,4 +158,13 @@ class StudentComplaintController extends Controller
       }
       return redirect()->back();
     }
+
+    public function solved(Request $request)
+    {
+      $complaint = Complaint::find($request->complaint_id);
+      $complaint->status = config('const.complaint_status.solved');
+      $complaint->save();
+
+      return redirect()->back();
+    }
 }

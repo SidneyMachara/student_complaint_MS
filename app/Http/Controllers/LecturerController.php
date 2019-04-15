@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Complaint;
 use App\ComplaintReply;
+use App\ComplaintHandler;
+use App\ComplaintHistory;
 use Auth;
 
 class LecturerController extends Controller
@@ -30,8 +32,35 @@ class LecturerController extends Controller
 
     public function complaints()
     {
+      if(ComplaintHandler::where('lecturer_id',Auth::user()->lecturer->id)->exists()){
 
-      $complaints = Complaint::where('lecturer_id', Auth::user()->lecturer->id)->get();
+        $handlers = ComplaintHandler::where('lecturer_id',Auth::user()->lecturer->id)->get();
+
+        $complaints_1 = collect();
+        foreach ($handlers as $handler) {
+          ComplaintHistory::where('complaint_handler_id',$handler->id)
+                            ->each(function($h) use (&$complaints_1){
+                              $complaints_1->add($h);
+                            });
+        }
+        $complaints_2 = collect();
+        ComplaintHistory::where('lecturer_id', Auth::user()->lecturer->id)->each(function($h) use (&$complaints_2){
+          $complaints_2->add($h);
+        });
+        // $complaints = $complaints->unique('complaint_id');
+        $complaints = collect();
+        $chs = ($complaints_1->merge($complaints_2))->unique('complaint_id');
+
+          foreach ($chs as $ch) {
+            $complaints->add($ch->complaint);
+
+          }
+
+
+      }else{
+        $complaints = Complaint::where('lecturer_id', Auth::user()->lecturer->id)->orderBy('updated_at','desc')->get();
+      }
+
       return view('lecturer.complaints',compact('complaints'));
     }
 
@@ -40,7 +69,8 @@ class LecturerController extends Controller
 
       $complaint = Complaint::find($complaint_id);
       $complaint_replies = ComplaintReply::where('complaint_id',$complaint_id)->paginate(10);
-      return view('lecturer.show',compact('complaint','complaint_replies'));
+      $history =ComplaintHistory::where('complaint_id',$complaint_id)->orderBy('created_at','desc')->get();
+      return view('lecturer.show',compact('complaint','complaint_replies','history'));
     }
 
     public function reply(Request $request)
