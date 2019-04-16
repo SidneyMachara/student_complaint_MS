@@ -33,7 +33,7 @@
 
     @if (count($complaints) > 0)
       @foreach ($complaints as $complaint)
-        <div class="card-body p-4 rounded mini-complain-card {{'type_'.$complaint->complaint_type}}">
+        <div class="card-body p-4 rounded mini-complain-card {{'type_'.$complaint->complaint_type .' '. 'status_'.$complaint->status}}">
           <div class="row ">
             <div class="col-md-1 ">
               <img src="{{  asset('assets/l.jpg') }}" class="rounded-circle" alt="" width="60" height="60">

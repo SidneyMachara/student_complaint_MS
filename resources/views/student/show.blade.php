@@ -21,8 +21,8 @@
             </div>
             <div class="col-md-3 my-auto">
               <small class="d-table ml-auto">
-                <i class="text-muted fa fa-eye mr-1"></i> 2
-                <i class="text-muted fa fa-comment-dots mr-1 ml-3"></i> 2
+                <i class="text-muted fa fa-eye mr-1"></i> {{ count($complaint->complaint_histories) }}
+                <i class="text-muted fa fa-comment-dots mr-1 ml-3"></i> {{ count($complaint->complaint_replies) }}
               </small>
             </div>
             <div class="col-md-2  my-auto">
@@ -115,6 +115,12 @@
         {{--/. replies --}}
           {{ $complaint_replies->links() }}
 
+          @if ( !$complaint->status == config('const.complaint_status.solved'))
+            <div class="botton-reply-box mt-3 p-4">
+                <p class="pt-3 pl-3 text-muted">Write a reply. </p>
+            </div>
+          @endif
+
 
       </div>
 
@@ -125,7 +131,7 @@
           <form class="" action="{{ route('student.solved') }} " method="post">
             @csrf
             <input type="hidden" name="complaint_id" value="{{ $complaint->id }}">
-            <input type="submit" class="btn mx-auto d-table  pl-4 pr-4 solved-btn mb-3"  name="" value="SOLVED">
+            <input type="submit" class="btn mx-auto d-table  pl-4 pr-4 unsolved-btn mb-3"  name="" value="SOLVED">
           </form>
 
 
@@ -154,6 +160,8 @@
         </div>
       </div>
 
+
+
     </div>
 
 
@@ -173,13 +181,13 @@
          </div>
         </div>
 
-        <div class="row">
+        {{-- <div class="row">
           <div class="col-md-4">
             <div class="form-group">
              <input type="file" class="form-control" name="file" id="file" >
            </div>
           </div>
-        </div>
+        </div> --}}
 
       <div class="row justify-content-end">
         <div class="col-md-2 col-6 ">
@@ -198,7 +206,7 @@
 
 @section('scripts')
   <script>
-    $('.reply-btn , .close-reply').click(function(){
+    $('.reply-btn , .close-reply, .botton-reply-box').click(function(){
       $( ".reply-form-container" ).slideToggle("slow");
     });
 
