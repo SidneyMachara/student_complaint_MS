@@ -30,7 +30,7 @@ class StudentComplaintController extends Controller
     public function index()
     {
       $courses = Course::all();
-      $lecturers = Lecturer::all();
+      $lecturers = Lecturer::where('id','!=',1)->get(); //sys-admin id =1
       $complaints = Complaint::where('student_id',Auth::user()->student->id)->orderBy('updated_at','desc')->get();
       return view('student.index',compact('courses','lecturers','complaints'));
     }
@@ -38,7 +38,7 @@ class StudentComplaintController extends Controller
     public function note()
     {
       $courses = Course::all();
-      $lecturers = Lecturer::all();
+      $lecturers = Lecturer::where('id','!=',1)->get();
       return view('note',compact('courses','lecturers'));
     }
 
@@ -102,7 +102,7 @@ class StudentComplaintController extends Controller
     {
 
       $courses = Course::all();
-      $lecturers = Lecturer::all();
+      $lecturers = Lecturer::where('id','!=',1)->get();
       $complaint = Complaint::find($complaint_id);
       $complaint_replies = ComplaintReply::where('complaint_id',$complaint_id)->paginate(10);
       $history = ComplaintHistory::where('complaint_id',$complaint_id)->orderBy('created_at','desc')->get();
@@ -170,9 +170,9 @@ class StudentComplaintController extends Controller
 
     public function solved_complaints()
     {
-  
+
       $courses = Course::all();
-      $lecturers = Lecturer::all();
+      $lecturers = Lecturer::where('id','!=',1)->get();
       $complaints = Complaint::where([['student_id',Auth::user()->student->id],['status',config('const.complaint_status.solved')]])->orderBy('updated_at','desc')->get();
 
       return view('student.index',compact('courses','lecturers','complaints'));
@@ -182,7 +182,7 @@ class StudentComplaintController extends Controller
     {
 
       $courses = Course::all();
-      $lecturers = Lecturer::all();
+      $lecturers = Lecturer::where('id','!=',1)->get();
       $complaints = Complaint::where([['student_id',Auth::user()->student->id],['status',config('const.complaint_status.unsolved')]])->orderBy('updated_at','desc')->get();
       return view('student.index',compact('courses','lecturers','complaints'));
     }

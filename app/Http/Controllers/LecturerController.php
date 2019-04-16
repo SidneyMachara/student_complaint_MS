@@ -27,7 +27,47 @@ class LecturerController extends Controller
 
     public function index()
     {
-      return view('lecturer.index');
+      if(ComplaintHandler::where('lecturer_id',Auth::user()->lecturer->id)->exists()){
+        $year = date("Y");
+        $handlers = ComplaintHandler::where('lecturer_id',Auth::user()->lecturer->id)->get();
+
+        $complaints_1 = collect();
+        foreach ($handlers as $handler) {
+          ComplaintHistory::where('complaint_handler_id',$handler->id)
+                            ->each(function($h) use (&$complaints_1){
+                              $complaints_1->add($h);
+                            });
+        }
+        $complaints_2 = collect();
+        ComplaintHistory::where('lecturer_id', Auth::user()->lecturer->id)->each(function($h) use (&$complaints_2){
+          $complaints_2->add($h);
+        });
+        // $complaints = $complaints->unique('complaint_id');
+        $complaints = collect();
+        $chs = ($complaints_1->merge($complaints_2))->unique('complaint_id');
+
+          foreach ($chs as $ch) {
+            if($ch->created_at->format('Y') == $year){
+              $complaints->add($ch->complaint);
+            }
+
+
+          }
+
+
+      }else{
+        $complaints = Complaint::where('lecturer_id', Auth::user()->lecturer->id)
+                                  ->whereYear('created_at', $year )
+                                  ->orderBy('updated_at','desc')->get();
+      }
+
+      $complaint_stats = stats($complaints);
+
+      return view('lecturer.index',array(
+                          'complaints_per_month'          => $complaint_stats['complaints_per_month'],
+                          'solved_complaints_per_month'   => $complaint_stats['solved_complaints_per_month'],
+                          'unsolved_complaints_per_month' => $complaint_stats['unsolved_complaints_per_month']
+                        ));
     }
 
     public function complaints()

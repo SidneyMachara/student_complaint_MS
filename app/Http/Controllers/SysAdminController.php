@@ -9,6 +9,7 @@ use App\lecturer;
 use App\Course;
 use App\Position;
 use App\ComplaintHandler;
+use App\Complaint;
 use Illuminate\Support\Facades\Hash;
 
 class SysAdminController extends Controller
@@ -26,7 +27,19 @@ class SysAdminController extends Controller
 
     public function index()
     {
-      return view('sys_admin.index');
+      $year = date("Y");
+      $complaints = Complaint::whereYear('created_at', $year )->get(); //complaints for this year
+
+      $complaint_stats = stats($complaints);
+
+      return view('sys_admin.index',array(
+                          'complaints_per_month'          => $complaint_stats['complaints_per_month'],
+                          'solved_complaints_per_month'   => $complaint_stats['solved_complaints_per_month'],
+                          'unsolved_complaints_per_month' => $complaint_stats['unsolved_complaints_per_month'],
+                          'students' => count(Student::all()),
+                          'lecturers' => count(Lecturer::where('id','!=',1)->get()),
+                        ));
+
     }
 
     public function students()
@@ -61,7 +74,7 @@ class SysAdminController extends Controller
 
     public function lecturers()
     {
-      $lecturers = Lecturer::all();
+      $lecturers = Lecturer::where('id','!=',1)->get(); //sys-admin id =1
       return view('sys_admin.lecturers.index',compact('lecturers'));
     }
 
@@ -90,7 +103,7 @@ class SysAdminController extends Controller
     public function config()
     {
       $courses = Course::paginate(6);
-      $lecturers = Lecturer::all();
+      $lecturers = Lecturer::where('id','!=',1)->get(); //sys-admin id =1
       $positions = Position::all();
       $grade_handers = ComplaintHandler::where('complaint_type', config('const.complaint_type.grade'))->get();
       $lecturer_handers = ComplaintHandler::where('complaint_type', config('const.complaint_type.lecturer'))->get();

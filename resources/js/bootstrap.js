@@ -12,6 +12,7 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
+    var Chart = require('chart.js')
 } catch (e) {}
 
 /**
