@@ -60,7 +60,10 @@
 
           @endforeach
 
-          <button type="button" class="btn reply-btn" name="button">Reply</button>
+          @if(!$complaint->status == config('const.complaint_status.solved'))
+            <button type="button" class="btn reply-btn" name="button">Reply</button>
+          @endif
+
         </div>
         {{-- /. complaint --}}
 
@@ -104,7 +107,9 @@
 
               @endforeach --}}
 
-              <button type="button" class="btn reply-btn" name="button">Reply</button>
+              @if(!$complaint->status == config('const.complaint_status.solved'))
+                <button type="button" class="btn reply-btn" name="button">Reply</button>
+              @endif
             </div>
           @endforeach
         {{--/. replies --}}
