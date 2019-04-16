@@ -45,7 +45,10 @@ Route::prefix('/student')->group(function () {
     Route::post('/complaints', 'StudentComplaintController@store_complaint')->name('student.store_complaint');
     Route::post('/complaints/reply', 'StudentComplaintController@reply')->name('student.reply');
     Route::post('/complaints/escalate', 'StudentComplaintController@escalate')->name('student.escalate');
-    Route::post('/complaints/solved', 'StudentComplaintController@solved')->name('student.solved');
+    Route::post('/complaint/solved', 'StudentComplaintController@solved')->name('student.solved');
+
+    Route::get('/get/complaints/solved', 'StudentComplaintController@solved_complaints')->name('student.solvedComplaints');
+    Route::get('/get/complaints/unsolved', 'StudentComplaintController@unsolved_complaints')->name('student.unsolvedComplaints');
 
 
     Route::get('/note', 'StudentComplaintController@note')->name('note');
@@ -58,4 +61,8 @@ Route::prefix('/lecturer')->group(function () {
     Route::get('/profile', 'LecturerController@profile')->name('lecturer.profile');
 
     Route::post('/complaints/reply', 'LecturerController@reply')->name('lecturer.reply');
+
+    Route::get('/get/complaints/solved', 'LecturerController@solved_complaints')->name('lecturer.solvedComplaints');
+    Route::get('/get/complaints/unsolved', 'LecturerController@unsolved_complaints')->name('lecturer.unsolvedComplaints');
+
 });

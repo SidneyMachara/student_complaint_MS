@@ -167,4 +167,25 @@ class StudentComplaintController extends Controller
 
       return redirect()->back();
     }
+
+    public function solved_complaints()
+    {
+  
+      $courses = Course::all();
+      $lecturers = Lecturer::all();
+      $complaints = Complaint::where([['student_id',Auth::user()->student->id],['status',config('const.complaint_status.solved')]])->orderBy('updated_at','desc')->get();
+
+      return view('student.index',compact('courses','lecturers','complaints'));
+    }
+
+    public function unsolved_complaints()
+    {
+
+      $courses = Course::all();
+      $lecturers = Lecturer::all();
+      $complaints = Complaint::where([['student_id',Auth::user()->student->id],['status',config('const.complaint_status.unsolved')]])->orderBy('updated_at','desc')->get();
+      return view('student.index',compact('courses','lecturers','complaints'));
+    }
+
+
 }

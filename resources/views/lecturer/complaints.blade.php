@@ -4,35 +4,39 @@
   <div class="row">
     <div class="col-md-3 col-12">
 
-        <ul class="list-group mt-5 side-nav-ul">
-          <li class="list-group-item border-0"  >
-            <a href="{{ route('lecturer.complaints') }}"><i class="fa fa-question mr-2"></i>All Complaints</a>
-          </li>
-          <li class="list-group-item border-0">
-            <a href="#"><i class="fa fa-times mr-2"></i>Unsolved Complaints</a>
-          </li>
-          <li class="list-group-item border-0">
-            <a href="#"><i class="fa fa-check-circle mr-2"></i>Solved Complaints</a>
-          </li>
-        </ul>
+        @include('lecturer.partials.side-nav')
     </div>
     <div class="col-md-9  col-12">
 
 
-      <div class="w-25 ml-auto mr-4">
-        <div class="input-group mb-3 ">
-          <div class="input-group-prepend" >
-            <span class="input-group-text border-0" id="basic-addon1" style="background-color:#eeeeee; border-radius:50px 0 0 50px;" ><i class="fa fa-search"></i></span>
+      <div class="row mt-3">
+        <div class="col-md-6 col-6 ">
+          <div class="w-25 form-group filter2">
+            <select class="form-control filter" id="filter" name="" required>
+              <option value="all" selected>All</option>
+              <option value="lecturer">Lecturer</option>
+              <option value="grade">Grade</option>
+            </select>
           </div>
-          <input style="background-color:#eeeeee; border-radius: 0 50px 50px 0;" type="text" class="form-control border-0 pt-3 pb-3" placeholder="Whatcha looking for?" aria-label="" aria-describedby="basic-addon1">
+        </div>
+
+        <div class="col-md-6 col-6">
+          <div class="w-50 ml-auto mr-4">
+            <div class="input-group mb-3 ">
+              <div class="input-group-prepend" >
+                <span class="input-group-text border-0" id="basic-addon1" style="background-color:#eeeeee; border-radius:50px 0 0 50px;" ><i class="fa fa-search"></i></span>
+              </div>
+              <input style="background-color:#eeeeee; border-radius: 0 50px 50px 0;" type="text" class="form-control border-0 pt-3 pb-3" placeholder="Whatcha looking for?" aria-label="" aria-describedby="basic-addon1">
+            </div>
+          </div>
         </div>
       </div>
 
-        <div class="mt-5">
+        <div class="mt-3">
 
           @if (count($complaints) > 0)
             @foreach ($complaints as $complaint)
-              <div class="card-body p-4 rounded mini-complain-card">
+              <div class="card-body p-4 rounded mini-complain-card {{'type_'.$complaint->complaint_type }}">
                 <div class="row ">
                   <div class="col-md-1 ">
                     <img src="{{  asset('assets/l.jpg') }}" class="rounded-circle" alt="" width="60" height="60">
@@ -74,4 +78,25 @@
 
     </div>
   </div>
+@endsection
+@section('scripts')
+  <script>
+  $("#filter").change(function () {
+    var opt = $('#filter').val();
+    if(opt == 'lecturer') {
+      //hide grade { type_2 }
+      $('.type_2').hide(1);
+      $('.type_1').show('slow');
+    }else if(opt == 'grade') {
+      //hide lecture { type_1 }
+      $('.type_1').hide(1);
+      $('.type_2').show('slow');
+    }else if(opt == 'all') {
+      $('.type_1').show(function(){
+        $('.type_2').show(10);
+      });
+
+    }
+  });
+  </script>
 @endsection

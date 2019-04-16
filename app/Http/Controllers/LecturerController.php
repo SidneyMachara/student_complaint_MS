@@ -84,4 +84,77 @@ class LecturerController extends Controller
 
       return redirect()->back();
     }
+
+    public function solved_complaints()
+    {
+
+      if(ComplaintHandler::where('lecturer_id',Auth::user()->lecturer->id)->exists()){
+
+        $handlers = ComplaintHandler::where('lecturer_id',Auth::user()->lecturer->id)->get();
+
+        $complaints_1 = collect();
+        foreach ($handlers as $handler) {
+          ComplaintHistory::where('complaint_handler_id',$handler->id)
+                            ->each(function($h) use (&$complaints_1){
+                              $complaints_1->add($h);
+                            });
+        }
+        $complaints_2 = collect();
+        ComplaintHistory::where('lecturer_id', Auth::user()->lecturer->id)->each(function($h) use (&$complaints_2){
+          $complaints_2->add($h);
+        });
+        // $complaints = $complaints->unique('complaint_id');
+        $complaints = collect();
+        $chs = ($complaints_1->merge($complaints_2))->unique('complaint_id');
+
+          foreach ($chs as $ch) {
+            if($ch->complaint->status == config('const.complaint_status.solved')){
+              $complaints->add($ch->complaint);
+            }
+
+          }
+
+
+      }else{
+        $complaints = Complaint::where([['lecturer_id', Auth::user()->lecturer->id],['status',config('const.complaint_status.solved')]])->orderBy('updated_at','desc')->get();
+      }
+
+      return view('lecturer.complaints',compact('complaints'));
+    }
+
+    public function unsolved_complaints()
+    {
+      if(ComplaintHandler::where('lecturer_id',Auth::user()->lecturer->id)->exists()){
+
+        $handlers = ComplaintHandler::where('lecturer_id',Auth::user()->lecturer->id)->get();
+
+        $complaints_1 = collect();
+        foreach ($handlers as $handler) {
+          ComplaintHistory::where('complaint_handler_id',$handler->id)
+                            ->each(function($h) use (&$complaints_1){
+                              $complaints_1->add($h);
+                            });
+        }
+        $complaints_2 = collect();
+        ComplaintHistory::where('lecturer_id', Auth::user()->lecturer->id)->each(function($h) use (&$complaints_2){
+          $complaints_2->add($h);
+        });
+        // $complaints = $complaints->unique('complaint_id');
+        $complaints = collect();
+        $chs = ($complaints_1->merge($complaints_2))->unique('complaint_id');
+
+          foreach ($chs as $ch) {
+            if($ch->complaint->status == config('const.complaint_status.unsolved')){
+              $complaints->add($ch->complaint);
+            }
+
+          }
+
+
+      }else{
+        $complaints = Complaint::where([['lecturer_id', Auth::user()->lecturer->id],['status',config('const.complaint_status.unsolved')]])->orderBy('updated_at','desc')->get();
+      }
+
+      return view('lecturer.complaints',compact('complaints'));
+    }
 }

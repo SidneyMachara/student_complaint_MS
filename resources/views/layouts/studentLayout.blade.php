@@ -54,10 +54,10 @@
                       <a href="{{ route('student.allComplaints') }}"  class="{{ isActiveRouteA(['student.allComplaints']) }}"><i class="fa fa-question mr-2 "></i>All Complaints</a>
                     </li>
                     <li class="list-group-item border-0">
-                      <a href="javascript:;" class=""><i class="fa fa-times mr-2" ></i>Unsolved Complaints</a>
+                      <a href="{{ route('student.unsolvedComplaints') }}" class="{{ isActiveRouteA(['student.unsolvedComplaints']) }}"><i class="fa fa-times mr-2" ></i>Unsolved Complaints</a>
                     </li>
                     <li class="list-group-item border-0">
-                      <a  href="javascript:;"  ><i class="fa fa-check-circle mr-2" class=""></i>Solved Complaints</a>
+                      <a  href="{{ route('student.solvedComplaints') }}"  class="{{ isActiveRouteA(['student.solvedComplaints']) }}"><i class="fa fa-check-circle mr-2" class=""></i>Solved Complaints</a>
                     </li>
                   </ul>
               </div>

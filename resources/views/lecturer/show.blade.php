@@ -5,17 +5,7 @@
   <div class="row">
     <div class="col-md-3 col-12">
 
-        <ul class="list-group mt-5 side-nav-ul">
-          <li class="list-group-item border-0"  >
-            <a href="{{ route('lecturer.complaints') }}"><i class="fa fa-question mr-2"></i>All Complaints</a>
-          </li>
-          <li class="list-group-item border-0">
-            <a href="#"><i class="fa fa-times mr-2"></i>Unsolved Complaints</a>
-          </li>
-          <li class="list-group-item border-0">
-            <a href="#"><i class="fa fa-check-circle mr-2"></i>Solved Complaints</a>
-          </li>
-        </ul>
+      @include('lecturer.partials.side-nav')
     </div>
     <div class="col-md-9  col-12">
 
@@ -39,8 +29,8 @@
                 </div>
                 <div class="col-md-3 my-auto">
                   <small class="d-table ml-auto">
-                    <i class="text-muted fa fa-eye mr-1"></i> 2
-                    <i class="text-muted fa fa-comment-dots mr-1 ml-3"></i> 2
+                    <i class="text-muted fa fa-eye mr-1"></i> {{ count($complaint->complaint_histories) }}
+                    <i class="text-muted fa fa-comment-dots mr-1 ml-3"></i> {{ count($complaint->complaint_replies) }}
                   </small>
                 </div>
                 <div class="col-md-2  my-auto">
