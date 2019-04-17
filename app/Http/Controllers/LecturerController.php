@@ -27,8 +27,9 @@ class LecturerController extends Controller
 
     public function index()
     {
-      if(ComplaintHandler::where('lecturer_id',Auth::user()->lecturer->id)->exists()){
         $year = date("Y");
+      if(ComplaintHandler::where('lecturer_id',Auth::user()->lecturer->id)->exists()){
+
         $handlers = ComplaintHandler::where('lecturer_id',Auth::user()->lecturer->id)->get();
 
         $complaints_1 = collect();

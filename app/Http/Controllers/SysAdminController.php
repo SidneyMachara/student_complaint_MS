@@ -68,6 +68,7 @@ class SysAdminController extends Controller
       $student->student_id = $request->studentId;
       $student->save();
 
+      $request->session()->flash('success', 'Task was successful!');
       return redirect()->back();
     }
 
@@ -97,6 +98,7 @@ class SysAdminController extends Controller
       $lecturer->lecturer_id = $request->lecturerId;
       $lecturer->save();
 
+      $request->session()->flash('success', 'Task was successful!');
       return redirect()->back();
     }
 
@@ -147,10 +149,11 @@ class SysAdminController extends Controller
           $handler->position_id = $request->position_id;
           $handler->save();
 
+          $request->session()->flash('success', 'Task was successful!');
           return redirect()->back();
        }
 
-
+       $request->session()->flash('error', 'Task Failed!');
         return redirect()->back();
       }
 }

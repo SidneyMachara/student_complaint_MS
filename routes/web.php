@@ -44,6 +44,7 @@ Route::prefix('/student')->group(function () {
 
     Route::post('/complaints', 'StudentComplaintController@store_complaint')->name('student.store_complaint');
     Route::post('/complaints/reply', 'StudentComplaintController@reply')->name('student.reply');
+    Route::post('/edit_complaint', 'StudentComplaintController@edit_complaint')->name('student.edit_complaint');
     Route::post('/complaints/escalate', 'StudentComplaintController@escalate')->name('student.escalate');
     Route::post('/complaint/solved', 'StudentComplaintController@solved')->name('student.solved');
 

@@ -1,4 +1,4 @@
-<div class="modal" id="add_grade_handler_modal">
+<div class="modal fade" id="add_grade_handler_modal">
   <div class="modal-dialog">
     <div class="modal-content">
 

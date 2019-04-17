@@ -36,7 +36,7 @@
         <div class="card-body p-4 rounded mini-complain-card {{'type_'.$complaint->complaint_type }}">
           <div class="row ">
             <div class="col-md-1 ">
-              <img src="{{  asset('assets/l.jpg') }}" class="rounded-circle" alt="" width="60" height="60">
+              <img src="{{  asset('assets/avatar3.png') }}" class="rounded-circle" alt="" width="60" height="60">
             </div>
             <div class="col-md-7 my-auto pl-4">
               <h5 class="font-weight-bold mb-1  my-auto"><a href="{{ route('student.showComplaint',$complaint->id) }}">{{ mb_strimwidth($complaint->title, 0, 55, " ...")}}</a></h5>

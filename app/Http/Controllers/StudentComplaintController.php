@@ -32,6 +32,7 @@ class StudentComplaintController extends Controller
       $courses = Course::all();
       $lecturers = Lecturer::where('id','!=',1)->get(); //sys-admin id =1
       $complaints = Complaint::where('student_id',Auth::user()->student->id)->orderBy('updated_at','desc')->get();
+
       return view('student.index',compact('courses','lecturers','complaints'));
     }
 
@@ -94,7 +95,7 @@ class StudentComplaintController extends Controller
       $history->is_active = config('const.is_active.true');
       $history->save();
 
-
+      $request->session()->flash('success', 'Task was successful!');
       return redirect()->back();
     }
 
@@ -142,6 +143,7 @@ class StudentComplaintController extends Controller
                                               ])->first()->id;
 
           }else{
+            $request->session()->flash('error', 'Cant Escalate, No Next Handler');
             return redirect()->back();
           }
 
@@ -154,8 +156,11 @@ class StudentComplaintController extends Controller
         $history->is_active = config('const.is_active.true');
         $history->save();
 
+        $request->session()->flash('success', 'Task was successful!');
         return redirect()->back();
       }
+
+      $request->session()->flash('error', 'Cant Escalate, No Next Handler');
       return redirect()->back();
     }
 
@@ -165,6 +170,7 @@ class StudentComplaintController extends Controller
       $complaint->status = config('const.complaint_status.solved');
       $complaint->save();
 
+      $request->session()->flash('success', 'Task was successful!');
       return redirect()->back();
     }
 
@@ -185,6 +191,17 @@ class StudentComplaintController extends Controller
       $lecturers = Lecturer::where('id','!=',1)->get();
       $complaints = Complaint::where([['student_id',Auth::user()->student->id],['status',config('const.complaint_status.unsolved')]])->orderBy('updated_at','desc')->get();
       return view('student.index',compact('courses','lecturers','complaints'));
+    }
+
+    public function edit_complaint(Request $request)
+    {
+      $complaint = Complaint::find($request->complaint_id);
+      $complaint->title = $request->complaint_title;
+      $complaint->body = $request->body;
+      $complaint->save();
+
+      $request->session()->flash('success', 'Task was successful!');
+      return redirect()->back();
     }
 
 

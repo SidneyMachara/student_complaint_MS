@@ -1,4 +1,4 @@
-<div class="modal" id="add_complin_modal">
+<div class="modal fade" id="add_complin_modal">
   <div class="modal-dialog">
     <div class="modal-content">
 

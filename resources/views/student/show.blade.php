@@ -64,6 +64,10 @@
             <button type="button" class="btn reply-btn" name="button">Reply</button>
           @endif
 
+          @if(!$complaint->status == config('const.complaint_status.solved'))
+            <button type="button" class="btn edit-btn float-right" name="button">Edit</button>
+          @endif
+
         </div>
         {{-- /. complaint --}}
 
@@ -168,7 +172,7 @@
 
   </div>
 
-
+  {{-- /. reply --}}
   <div class="row">
     <div class="col-md-6 card-body reply-form-container mx-auto" style="display:none; position:fixed;bottom:0;left:0;right:0">
       <form class="" action="{{ route('student.reply') }}"  method="POST">
@@ -201,6 +205,41 @@
       </form>
     </div>
   </div>
+  {{-- /. reply --}}
+
+  {{-- edit --}}
+  <div class="row">
+    <div class="col-md-6 card-body edit-form-container mx-auto" style="display:none; position:fixed;bottom:0;left:0;right:0">
+      <form class="" action="{{ route('student.edit_complaint') }}"  method="POST">
+        @csrf
+        <input type="hidden" name="complaint_id" value="{{ $complaint->id }}">
+        <div class="col-12 col-md-12">
+          <div class="form-group">
+             <input class="form-control border-0 mb-2 font-weight-bold w-100" type="text" name="complaint_title" value="{{ $complaint->title }}">
+          </div>
+        </div>
+        <div class="col-12 col-md-12 ">
+          <div class="form-group">
+           <textarea name="body" required  class="form-control mt-2" id="complain-edit" rows="5" cols="60" >
+        {{ $complaint->body }}
+           </textarea>
+         </div>
+        </div>
+
+
+      <div class="row justify-content-end">
+        <div class="col-md-2 col-6 ">
+            <button type="button" class="btn d-inline close-edit" name="button">close</button>
+        </div>
+        <div class="col-md-2 col-6">
+          <input type="submit" name=""  class="btn new-complaint-btn ml-auto d-table pl-3 pr-3" value="Submit">
+        </div>
+      </div>
+
+      </form>
+    </div>
+  </div>
+  {{--/. edit --}}
 @endsection
 
 
@@ -208,6 +247,11 @@
   <script>
     $('.reply-btn , .close-reply, .botton-reply-box').click(function(){
       $( ".reply-form-container" ).slideToggle("slow");
+    });
+
+
+    $('.edit-btn, .close-edit ').click(function(){
+      $( ".edit-form-container" ).slideToggle("slow");
     });
 
 

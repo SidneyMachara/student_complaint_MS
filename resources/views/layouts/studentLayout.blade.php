@@ -70,6 +70,10 @@
 
 
         </main>
+
+        <div class="alert-card card-body  w-25" style="display:none; ">
+            <p class="p-0 m-0"></p>
+        </div>
     </div>
     @include('student.complaints.create')
 
@@ -77,7 +81,35 @@
     <script src="{{ asset('js/app.js') }}" ></script>
 
 
+    <script>
+    $(function(){
 
+      function sexy_alert( status , msg)
+      {
+        if( status == 'success') {
+          $('.alert-card ').addClass('success-noti');
+        } else if(status == 'error') {
+          $('.alert-card ').addClass('error-noti');
+        }
+
+        $('.alert-card > p').html(msg);
+        $('.alert-card ').slideToggle();
+
+        //remove alert
+         setTimeout(function () {
+           $('.alert-card ').slideToggle();
+         }, 2000);
+
+      }
+
+      @if(Session::has('success'))
+        sexy_alert( 'success' , '{{ session()->pull('success') }}')
+      @elseif (Session::has('error'))
+        sexy_alert( 'error' , '{{ session()->pull('error') }}')
+      @endif
+    });
+
+    </script>
     @yield('scripts')
 </body>
 </html>
