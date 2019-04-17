@@ -18,11 +18,11 @@
             <div class="col-md-6 col-12">
               <div class="form-group">
                <label for="course_code">Course Code</label>
-               <input type="text" name="course_code" class="form-control" id="course_code" aria-describedby="course_code" placeholder="Enter Course Code">
+               <input type="text" name="course_code" class="form-control" id="course_code" aria-describedby="course_code" placeholder="Enter Course Code" required>
              </div>
             </div>
 
-        
+
           </div>
 
   <input type="submit" name="" value="SAVE" class="btn btn-create pl-3 pr-3 float-right">

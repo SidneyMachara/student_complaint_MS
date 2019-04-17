@@ -16,13 +16,13 @@
             <div class="col-md-6 col-12">
               <div class="form-group">
                <label for="fullName">Full-Name</label>
-               <input type="text" name="fullname" class="form-control" id="fullName" aria-describedby="fullName" placeholder="Enter Full-Name">
+               <input type="text" name="fullname" class="form-control" id="fullName" aria-describedby="fullName" placeholder="Enter Full-Name" required>
              </div>
             </div>
             <div class="col-md-6 col-12">
               <div class="form-group">
                <label for="studentId">Student id</label>
-               <input type="number" name="studentId" class="form-control" id="studentId" aria-describedby="studentId" placeholder="Enter Student Id">
+               <input type="number" name="studentId" class="form-control" id="studentId" aria-describedby="studentId" placeholder="Enter Student Id" required>
              </div>
             </div>
           </div>
@@ -31,7 +31,7 @@
             <div class="col-md-6 col-12">
               <div class="form-group">
                <label for="email">Email</label>
-               <input type="email" name="email" class="form-control" id="email" aria-describedby="email" placeholder="Enter email">
+               <input type="email" name="email" class="form-control" id="email" aria-describedby="email" placeholder="Enter email" required>
              </div>
             </div>
             <div class="col-md-6 col-12">

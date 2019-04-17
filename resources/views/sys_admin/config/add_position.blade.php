@@ -19,7 +19,7 @@
             <div class="col-md-6 col-12">
               <div class="form-group">
                <label for="position_title">Position title</label>
-               <input type="text" name="position_title" class="form-control" id="position_title" aria-describedby="position_title" placeholder="Enter Position title">
+               <input type="text" name="position_title" class="form-control" id="position_title" aria-describedby="position_title" required placeholder="Enter Position title">
              </div>
             </div>
           </div>

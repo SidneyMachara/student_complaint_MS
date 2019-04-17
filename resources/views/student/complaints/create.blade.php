@@ -35,7 +35,7 @@
             <div class="col-md-12 col-12">
               <div class="form-group">
                <label for="title">Title</label>
-               <input type="text" class="form-control" name="title" id="title" placeholder="Short Desciptive title">
+               <input type="text" class="form-control" name="title" id="title" placeholder="Short Desciptive title" required>
              </div>
             </div>
           </div>
@@ -71,7 +71,7 @@
             <div class="col-12 col-md-12">
               <div class="form-group">
                <label for="complain">Decribe your complain in full: <small class="text-danger">Use proper english</small></label>
-               <textarea name="body"  class="form-control" id="complain" rows="5" cols="60"></textarea>
+               <textarea name="body" required  class="form-control" id="complain" rows="5" cols="60"></textarea>
              </div>
 
             </div>

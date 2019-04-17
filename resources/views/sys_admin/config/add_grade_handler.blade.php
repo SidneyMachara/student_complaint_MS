@@ -19,7 +19,7 @@
             <div class="col-md-6 col-12">
               <div class="form-group">
                 <label for="grade_hander">Select Hander</label>
-                <select class="form-control" id="grade_hander" name="lecturer_id">
+                <select class="form-control" id="grade_hander" name="lecturer_id" required>
                   @foreach ($lecturers as $lecturer)
                     <option value="{{ $lecturer->id }}">{{ $lecturer->user->name }}</option>
                   @endforeach

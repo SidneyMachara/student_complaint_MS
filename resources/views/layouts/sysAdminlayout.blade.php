@@ -53,6 +53,12 @@
               @yield('content')
             </div>
         </main>
+        {{-- notification --}}
+        <div class="alert-card card-body  w-25" style="display:none; ">
+            <p class="p-0 m-0"></p>
+        </div>
+
+          {{--/. notification --}}
     </div>
 
     <!-- Scripts -->
@@ -61,63 +67,33 @@
     <script src="{{ asset('js/bootstrap-notify.js') }}" ></script>
 
     <script>
-            $(function () {
-                @if(Session::has('success'))
-  // alert('k');
-                @php
-                    $str = 'success';
-                    // $str = 'web.'.Session::get('success');
+    $(function(){
 
-                @endphp
-                $.notify({
-                    title: 'Success',
-                    message: '{{ $str }}'
-                },{
-                    type: 'success',
-                    timer: 2000,
-                    z_index: 10000,
-                    // animate: {
-                    //     enter: 'animated fadeInDown',
-                    //     exit: 'animated fadeOutUp'
-                    // },
-                    allow_dismiss: true
-                });
-                @endif
-                @if(Session::has('error'))
-                @php
-                    $str = 'web.'.Session::get('error');
-                @endphp
-                $.notify({
-                    title: 'Error',
-                    message: '{{ $str }}'
-                },{
-                    type: 'danger',
-                    timer: 2000,
-                    z_index: 10000,
-                    // animate: {
-                    //     enter: 'animated fadeInDown',
-                    //     exit: 'animated fadeOutUp'
-                    // },
-                    allow_dismiss: true
-                });
-                @endif
-            });
+      function sexy_alert( status , msg)
+      {
+        if( status == 'success') {
+          $('.alert-card ').addClass('success-noti');
+        } else if(status == 'error') {
+          $('.alert-card ').addClass('error-noti');
+        }
 
-            function notify(message, type)
-            {
-                $.notify({
-                    message: message
-                },{
-                    type: type,
-                    timer: 2000,
-                    z_index: 10000,
-                    // animate: {
-                    //     enter: 'animated fadeInDown',
-                    //     exit: 'animated fadeOutUp'
-                    // },
-                    allow_dismiss: true
-                });
-            }
+        $('.alert-card > p').html(msg);
+        $('.alert-card ').slideToggle();
+
+        //remove alert
+         setTimeout(function () {
+           $('.alert-card ').slideToggle();
+         }, 2000);
+
+      }
+
+      @if(Session::has('success'))
+        sexy_alert( 'success' , '{{ session()->pull('success') }}')
+      @elseif (Session::has('error'))
+        sexy_alert( 'error' , '{{ session()->pull('error') }}')
+      @endif
+    });
+
         </script>
         @yield('scripts')
 </body>

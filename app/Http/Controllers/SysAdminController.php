@@ -51,7 +51,9 @@ class SysAdminController extends Controller
 
     public function store_student(Request $request)
     {
-      //TODO :validate
+       $request->validate([
+          'fullname' => 'required',
+      ]);
 
 
       $user = new User;
