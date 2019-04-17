@@ -39,7 +39,7 @@
             </div>
           </div>
 
-          <input type="submit" name="" value="SAVE" class="btn btn-success float-right">
+          <input type="submit" name="" value="SAVE" class="btn btn-create pl-3 pr-3 float-right">
 
         </form>
       </div>

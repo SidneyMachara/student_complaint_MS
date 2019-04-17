@@ -78,13 +78,15 @@
           </div>
 
           <div class="row p-3">
-            <div class="col-md-12 col-12">
+            <div class="col-md-6 col-12">
               <input type="file" name="c_files[]" multiple="" value="">
             </div>
+            <div class="col-md-6 col-12">
+                <input type="submit" name="" value="SAVE" class="btn btn-create pl-3 pr-3 float-right">
+            </div>
           </div>
-          <br>
 
-            <input type="submit" name="" value="SAVE" class="btn btn-success float-right">
+
 
 
 
