@@ -23,7 +23,7 @@
             <td>{{ $lecturer->lecturer_id }}</td>
             <td>{{ $lecturer->user->name }}</td>
             <td>{{ $lecturer->user->email }}</td>
-            <td>{{ 0 }}</td>
+            <td>{{ count($lecturer->complaints) }}</td>
           </tr>
         @endforeach
 

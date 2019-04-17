@@ -139,11 +139,11 @@
           </form>
 
 
-          <form class="" action="{{ route('student.escalate') }} "method="post">
+          <form class="" action="{{ route('student.escalate') }} "method="post" id="escalate">
             @csrf
             <input type="hidden" name="complaint_id" value="{{ $complaint->id }}">
             <input type="hidden" name="complaint_type" value="{{ $complaint->complaint_type }}">
-            <input type="submit" class="btn mx-auto d-table escalate  pl-4 pr-4"  name="" value="ESCALATE">
+            <input type="submit"id="escalate-btn" class="btn mx-auto d-table escalate  pl-4 pr-4"  name="" value="ESCALATE">
           </form>
         @else
           <input type="submit" class="btn mx-auto d-table  pl-4 pr-4 solved-btn mb-3" disabled  name="" value="SOLVED">
@@ -254,6 +254,19 @@
       $( ".edit-form-container" ).slideToggle("slow");
     });
 
+    $('#escalate-btn').click(function(e){
+       e.preventDefault();
+       $('#overlay').show();
+    });
+    function cancel()
+    {
+      $('#overlay').hide();
+    }
+    function ok()
+    {
+      // $('#overlay').hide();
+       $( "#escalate" ).submit();
+    }
 
 
     // $('document').ready(function(){

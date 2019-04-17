@@ -71,10 +71,30 @@
 
         </main>
 
+        {{-- notification --}}
         <div class="alert-card card-body  w-25" style="display:none; ">
             <p class="p-0 m-0"></p>
         </div>
+          {{--/. notification --}}
+
+
     </div>
+    {{-- confirmation --}}
+  <div id="overlay">
+    <div class="card-body rounded w-25 mx-auto bg-light mt-5">
+      <h4 class="text-danger d-table mx-auto">Are you SURE ?</h4>
+
+      <div class="row justify-content-center mt-4">
+        <div class="col-md-4 col-6">
+          <button class="btn " type="button" onclick="cancel();" name="button">CANCEL</button>
+        </div>
+        <div class="col-md-4 col-6">
+          <button class="btn btn-outline-warning" type="button" onclick="ok();" name="button">CONTINUE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    {{-- /.confirmation --}}
     @include('student.complaints.create')
 
     <!-- Scripts -->

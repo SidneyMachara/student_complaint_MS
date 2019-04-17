@@ -11,6 +11,11 @@ class Complaint extends Model
       return $this->belongsTo('App\Student');
     }
 
+    public function lecturer()
+    {
+      return $this->belongsTo('App\Lecturer');
+    }
+
     public function complaint_attachments()
     {
       return $this->hasMany('App\ComplaintAttachment');
