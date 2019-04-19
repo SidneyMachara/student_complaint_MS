@@ -12,6 +12,13 @@
   cursor: pointer; /* Add a pointer on hover */
 }
 
+.logout-btn {
+  background-color: transparent;
+  font-weight: bold;
+  border: 1px solid transparent;
+  color: #b0bec5;
+}
+
 .header-bg{
   background-image: linear-gradient(to right, #243949 0%, #517fa4 100%);
 }

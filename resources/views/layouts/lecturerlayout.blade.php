@@ -25,7 +25,11 @@
         <nav class="header-bg ">
           <div class="row p-5">
             <div class="col-md-10 ">
-              <h5 class="text-light">UB</h5>
+              {{-- <h5 class="text-light">UB</h5> --}}
+              <form class="" action="{{ route('logout') }}" method="post">
+                @csrf
+                <input type="submit" class="logout-btn" name="" value="LOGOUT">
+              </form>
             </div>
             <div class="col-md-2">
 
