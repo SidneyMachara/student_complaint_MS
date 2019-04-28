@@ -18,7 +18,8 @@ Route::get('/logout', 'Auth\LoginController@logout'); //TODO : remove me
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/profile', 'CommonController@profile')->name('profile');
+Route::post('/change_password', 'CommonController@change_password')->name('change_password');
 
 
 

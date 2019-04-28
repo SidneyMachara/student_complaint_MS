@@ -36,8 +36,8 @@
             </div>
           </div>
           <div class="row justify-content-center ">
-              <div class="col-md-1 col-6 pb-4 text-center" style="{{ isActiveRoute(['']) }}">
-                <a href="" class="h5 text-light">PROFILE</a>
+              <div class="col-md-1 col-6 pb-4 text-center" style="{{ isActiveRoute(['profile']) }}">
+                <a href="{{ route('profile')}}" class="h5 text-light">PROFILE</a>
               </div>
               <div class="col-md-1 col-6  pb-4 text-center" style="{{ isActiveRoute(['note']) }}">
                 <a href="{{ route('note')}}" class="h5 text-light ">NOTE</a>
