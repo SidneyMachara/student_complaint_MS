@@ -60,7 +60,7 @@ class CommonController extends Controller
 
         $user = Auth::user();
 
-        if(  Hash::make($request->current_pwd)  != Auth::user()->password ) {
+        if( !Hash::check( $request->current_pwd ,  Auth::user()->password) ) {
           Session::flash('error','Wrong Current password');
           return redirect()->back();
         }
@@ -70,8 +70,11 @@ class CommonController extends Controller
           return redirect()->back();
         }
 
-        $user->password = $request->new_pwd;
+        $user->password = Hash::make($request->new_pwd);
         $user->update();
+
+        Session::flash('success','Password Changed');
+        return redirect()->back();
 
 
     }

@@ -72,8 +72,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.js" data-turbolinks-track="true"></script>
-    <script src="{{ asset('js/bootstrap-notify.js') }}" ></script>
 
     <script>
     $(function(){

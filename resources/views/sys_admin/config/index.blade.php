@@ -14,6 +14,7 @@
                   <th>Level</th>
                   <th>Handler</th>
                   <th>Position title</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -22,6 +23,17 @@
                     <td>{{ $grade_hander->level }}</td>
                     <td>{{ $grade_hander->lecturer->user->name }}</td>
                     <td>{{ $grade_hander->position->title }}</td>
+                    <td>
+                      <a href="#" class="text-muted"
+                        data-toggle="modal"
+                        data-target="#edit_handler_modal"
+                        data-lecturer_id="{{ $grade_hander->lecturer->id }}"
+                        data-position_id="{{ $grade_hander->position->id }}"
+                       >
+                       Edit
+                       {{-- <i class='fas fa-pencil-alt text-dark'></i> --}}
+                       </a>
+                     </td>
                   </tr>
                 @endforeach
               </tbody>
@@ -112,5 +124,25 @@
   @include('sys_admin.config.add_course')
   @include('sys_admin.config.add_grade_handler')
   @include('sys_admin.config.add_lecturer_handler')
+  @include('sys_admin.config.edit_handler')
   @include('sys_admin.config.add_position')
+@endsection
+
+@section('scripts')
+  <script>
+  $('#edit_handler_modal-Edit').on('show.bs.modal', function (event) {
+
+var button = $(event.relatedTarget) // Button that triggered the modal
+
+var lecturer_id = button.data('lecturer_id')
+var position_id = button.data('position_id')
+
+
+
+var modal = $(this)
+modal.find('.modal-body #edit_hander').val(lecturer_id)
+modal.find('.modal-body #edit_position_id').val(position_id)
+
+});
+  </script>
 @endsection
