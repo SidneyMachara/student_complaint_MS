@@ -104,6 +104,17 @@
                   <tr>
                     <td>{{ $key }}</td>
                     <td>{{ $course->course_code }}</td>
+                    <td>
+                      <a href="#" class="text-muted"
+                        data-toggle="modal"
+                        data-target="#edit_course_modal"
+                        data-edit_course_id="{{ $course->id }}"
+                        data-edit_course_code="{{ $course->course_code }}"
+                       >
+                       {{-- Edit --}}
+                       <i class='fa fa-pencil-alt text-dark text-muted'></i>
+                       </a>
+                     </td>
                   </tr>
                 @endforeach
               </tbody>
@@ -119,6 +130,7 @@
                 <tr>
                   <th>#</th>
                   <th>Title</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -126,6 +138,17 @@
                   <tr>
                     <td>{{ $key }}</td>
                     <td>{{ $position->title }}</td>
+                    <td>
+                      <a href="#" class="text-muted"
+                        data-toggle="modal"
+                        data-target="#edit_position_modal"
+                        data-position_id="{{ $position->id }}"
+                        data-position_title="{{ $position->title }}"
+                       >
+                       {{-- Edit --}}
+                       <i class='fa fa-pencil-alt text-dark text-muted'></i>
+                       </a>
+                     </td>
                   </tr>
                 @endforeach
               </tbody>
@@ -138,30 +161,58 @@
   </div>
 
   @include('sys_admin.config.add_course')
+  @include('sys_admin.config.edit_course')
   @include('sys_admin.config.add_grade_handler')
   @include('sys_admin.config.add_lecturer_handler')
   @include('sys_admin.config.edit_handler')
+  @include('sys_admin.config.edit_position')
   @include('sys_admin.config.add_position')
 @endsection
 
 @section('scripts')
   <script>
-  $('#edit_handler_modal').on('show.bs.modal', function (event) {
+  $('#edit_position_modal').on('show.bs.modal', function (event) {
 
-var button = $(event.relatedTarget) // Button that triggered the modal
+    var button = $(event.relatedTarget) // Button that triggered the modal
 
-var lecturer_id = button.data('lecturer_id')
-var position_id = button.data('position_id')
-var level = button.data('level')
-var complaint_id = button.data('complaint_id')
+    var position_title = button.data('position_title')
+    var position_id = button.data('position_id')
 
-var modal = $(this)
-modal.find('.modal-body #edit_hander').val(lecturer_id)
-modal.find('.modal-body #edit_position_id').val(position_id)
-modal.find('.modal-body #complaint_id').val(complaint_id)
+    var modal = $(this)
+    modal.find('.modal-body #edit_position_id').val(position_id)
+    modal.find('.modal-body #edit_position_title').val(position_title)
 
-$('.which_level').html(' - Level ' + level );
+    });
 
-});
+  $('#edit_course_modal').on('show.bs.modal', function (event) {
+
+    var button = $(event.relatedTarget) // Button that triggered the modal
+
+    var course_code = button.data('edit_course_code')
+    var course_id = button.data('edit_course_id')
+
+    var modal = $(this)
+    modal.find('.modal-body #edit_course_code').val(course_code)
+    modal.find('.modal-body #edit_course_id').val(course_id)
+
+    });
+
+$('#edit_handler_modal').on('show.bs.modal', function (event) {
+
+  var button = $(event.relatedTarget) // Button that triggered the modal
+
+  var lecturer_id = button.data('lecturer_id')
+  var position_id = button.data('position_id')
+  var level = button.data('level')
+  var complaint_id = button.data('complaint_id')
+
+  var modal = $(this)
+  modal.find('.modal-body #edit_hander').val(lecturer_id)
+  modal.find('.modal-body #edit_position_id').val(position_id)
+  modal.find('.modal-body #complaint_id').val(complaint_id)
+
+  $('.which_level').html(' - Level ' + level );
+
+  });
   </script>
 @endsection

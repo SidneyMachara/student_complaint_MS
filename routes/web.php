@@ -37,6 +37,8 @@ Route::prefix('/sys_admin')->group(function () {
 
 
     Route::put('/update_handler', 'SysAdminController@update_handler')->name('sys_admin.update_handler');
+    Route::put('/edit_position', 'SysAdminController@edit_position')->name('sys_admin.edit_position');
+    Route::put('/edit_course', 'SysAdminController@edit_course')->name('sys_admin.edit_course');
 
 });
 

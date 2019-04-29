@@ -4,7 +4,7 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Edit Grade Handler <span class="which_level text-success">(Level )</span></h4>
+        <h4 class="modal-title">Edit  Handler <span class="which_level text-success">(Level )</span></h4>
         <button type="button" class="close text-danger" data-dismiss="modal">&times;</button>
       </div>
 

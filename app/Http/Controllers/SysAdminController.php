@@ -125,6 +125,19 @@ class SysAdminController extends Controller
       $request->session()->flash('success', 'Task was successful!');
       return redirect()->back();
     }
+
+    public function edit_course(Request $request)
+    {
+
+      $course =  Course::find($request->edit_course_id);
+      $course->course_code = $request->edit_course_code;
+      $course->update();
+
+      $request->session()->flash('success', 'Task was successful!');
+      return redirect()->back();
+    }
+
+
     public function add_position(Request $request)
     {
       //TODO : validate duplicate
@@ -135,6 +148,17 @@ class SysAdminController extends Controller
 
       $request->session()->flash('success', 'Task was successful!');
       return redirect()->back();
+    }
+
+    public function edit_position(Request $request)
+    {
+        $position = Position::find($request->edit_position_id);
+        $position->title = $request->edit_position_title;
+        $position->update();
+
+        $request->session()->flash('success', 'Task was successful!');
+        return redirect()->back();
+
     }
 
     public function add_handler(Request $request)
