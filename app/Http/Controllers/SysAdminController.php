@@ -74,6 +74,22 @@ class SysAdminController extends Controller
       return redirect()->back();
     }
 
+    public function edit_student(Request $request)
+    {
+        $student =  Student::find($request->edit_id);
+        $user = User::find($student->user_id);
+
+        $user->email = $request->edit_student_email;
+        $user->name = $request->edit_student_name;
+        $user->update();
+
+        $student->student_id = $request->edit_student_id;
+        $student->update();
+
+        $request->session()->flash('success', 'Task was successful!');
+        return redirect()->back();
+    }
+
 
     public function lecturers()
     {
@@ -102,6 +118,22 @@ class SysAdminController extends Controller
 
       $request->session()->flash('success', 'Task was successful!');
       return redirect()->back();
+    }
+
+    public function edit_lecturer(Request $request)
+    {
+        $lecturer =  Lecturer::find($request->edit_id);
+        $user = User::find($lecturer->user_id);
+
+        $user->email = $request->edit_lecturer_email;
+        $user->name = $request->edit_lecturer_name;
+        $user->update();
+
+        $lecturer->lecturer_id = $request->edit_lecturer_id;
+        $lecturer->update();
+
+        $request->session()->flash('success', 'Task was successful!');
+        return redirect()->back();
     }
 
     public function config()
