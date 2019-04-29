@@ -53,6 +53,7 @@ class SysAdminController extends Controller
     {
        $request->validate([
           'fullname' => 'required',
+          'email'    => 'unique:users,email'
       ]);
 
 
@@ -76,6 +77,11 @@ class SysAdminController extends Controller
 
     public function edit_student(Request $request)
     {
+
+          $request->validate([
+             'edit_student_email'    => 'unique:users,email'
+         ]);
+
         $student =  Student::find($request->edit_id);
         $user = User::find($student->user_id);
 
@@ -99,7 +105,10 @@ class SysAdminController extends Controller
 
     public function store_lecturer(Request $request)
     {
-      //TODO :validate
+
+      $request->validate([
+         'email'    => 'unique:users,email'
+       ]);
 
 
       $user = new User;
@@ -122,6 +131,9 @@ class SysAdminController extends Controller
 
     public function edit_lecturer(Request $request)
     {
+
+      
+
         $lecturer =  Lecturer::find($request->edit_id);
         $user = User::find($lecturer->user_id);
 
@@ -148,7 +160,9 @@ class SysAdminController extends Controller
 
     public function add_course(Request $request)
     {
-      //TODO : validate duplicate
+      $request->validate([
+         'course_code'    => 'unique:courses,course_code'
+       ]);
 
       $course = new Course;
       $course->course_code = $request->course_code;
@@ -160,6 +174,9 @@ class SysAdminController extends Controller
 
     public function edit_course(Request $request)
     {
+      $request->validate([
+         'course_code'    => 'unique:courses,course_code'
+       ]);
 
       $course =  Course::find($request->edit_course_id);
       $course->course_code = $request->edit_course_code;
@@ -172,7 +189,9 @@ class SysAdminController extends Controller
 
     public function add_position(Request $request)
     {
-      //TODO : validate duplicate
+      $request->validate([
+         'position_title'    => 'unique:positions,title'
+       ]);
 
       $position = new Position;
       $position->title = $request->position_title;
@@ -184,6 +203,10 @@ class SysAdminController extends Controller
 
     public function edit_position(Request $request)
     {
+      $request->validate([
+         'position_title'    => 'unique:positions,title'
+       ]);
+
         $position = Position::find($request->edit_position_id);
         $position->title = $request->edit_position_title;
         $position->update();
