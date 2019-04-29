@@ -158,4 +158,17 @@ class SysAdminController extends Controller
        $request->session()->flash('error', 'Task Failed!');
         return redirect()->back();
       }
+
+      public function update_handler(Request $request)
+      {
+          $handler = ComplaintHandler::find($request->complaint_id);
+
+          $handler->lecturer_id = $request->lecturer_id;
+          $handler->position_id = $request->position_id;
+          $handler->update();
+
+          // Session::flash('success',"Update successful");
+          $request->session()->flash('success', 'Task was successful!');
+          return redirect()->back();
+      }
 }

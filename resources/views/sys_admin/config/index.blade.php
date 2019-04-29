@@ -29,9 +29,11 @@
                         data-target="#edit_handler_modal"
                         data-lecturer_id="{{ $grade_hander->lecturer->id }}"
                         data-position_id="{{ $grade_hander->position->id }}"
+                        data-level="{{ $grade_hander->level }}"
+                        data-complaint_id="{{ $grade_hander->id }}"
                        >
-                       Edit
-                       {{-- <i class='fas fa-pencil-alt text-dark'></i> --}}
+                       {{-- Edit --}}
+                       <i class='fa fa-pencil-alt text-dark text-muted'></i>
                        </a>
                      </td>
                   </tr>
@@ -53,6 +55,7 @@
                 <th>Level</th>
                 <th>Handler</th>
                 <th>Position title</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -62,6 +65,19 @@
                     <td>{{ $lecturer_hander->level }}</td>
                     <td>{{ $lecturer_hander->lecturer->user->name }}</td>
                     <td>{{ $lecturer_hander->position->title }}</td>
+                    <td>
+                      <a href="#" class="text-muted"
+                        data-toggle="modal"
+                        data-target="#edit_handler_modal"
+                        data-lecturer_id="{{ $lecturer_hander->lecturer->id }}"
+                        data-position_id="{{ $lecturer_hander->position->id }}"
+                        data-level="{{ $lecturer_hander->level }}"
+                        data-complaint_id="{{ $lecturer_hander->id }}"
+                       >
+                       {{-- Edit --}}
+                       <i class='fa fa-pencil-alt text-dark text-muted'></i>
+                       </a>
+                     </td>
                   </tr>
                 @endforeach
               </tr>
@@ -130,18 +146,21 @@
 
 @section('scripts')
   <script>
-  $('#edit_handler_modal-Edit').on('show.bs.modal', function (event) {
+  $('#edit_handler_modal').on('show.bs.modal', function (event) {
 
 var button = $(event.relatedTarget) // Button that triggered the modal
 
 var lecturer_id = button.data('lecturer_id')
 var position_id = button.data('position_id')
-
-
+var level = button.data('level')
+var complaint_id = button.data('complaint_id')
 
 var modal = $(this)
 modal.find('.modal-body #edit_hander').val(lecturer_id)
 modal.find('.modal-body #edit_position_id').val(position_id)
+modal.find('.modal-body #complaint_id').val(complaint_id)
+
+$('.which_level').html(' - Level ' + level );
 
 });
   </script>

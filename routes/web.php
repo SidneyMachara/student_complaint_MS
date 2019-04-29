@@ -35,6 +35,9 @@ Route::prefix('/sys_admin')->group(function () {
     Route::post('/add_handler', 'SysAdminController@add_handler')->name('sys_admin.add_handler');
     Route::post('/add_position', 'SysAdminController@add_position')->name('sys_admin.add_position');
 
+
+    Route::put('/update_handler', 'SysAdminController@update_handler')->name('sys_admin.update_handler');
+
 });
 
 Route::prefix('/student')->group(function () {

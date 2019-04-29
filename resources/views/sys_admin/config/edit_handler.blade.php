@@ -4,16 +4,17 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Add Grade Handler</h4>
+        <h4 class="modal-title">Edit Grade Handler <span class="which_level text-success">(Level )</span></h4>
         <button type="button" class="close text-danger" data-dismiss="modal">&times;</button>
       </div>
 
       <!-- Modal body -->
       <div class="modal-body">
-        <form class="" action="">
+        <form class="" action="{{ route('sys_admin.update_handler') }}" method="post">
           @csrf
 
-          <input type="hidden" name="complaint_type" value="{{ config('const.complaint_type.grade') }}">
+          <input type="hidden" name="complaint_id" id="complaint_id" value="">
+          <input type="hidden" name="_method" value="PUT">
 
           <div class="row mt-2">
             <div class="col-md-6 col-12">
@@ -42,7 +43,7 @@
 
 
 
-          <input type="submit" name="" value="SAVE" class="btn btn-create pl-3 pr-3 float-right">
+          <input type="submit" name="" value="UPDATE" class="btn btn-create pl-3 pr-3 float-right">
 
         </form>
       </div>
