@@ -18,7 +18,8 @@ Route::get('/logout', 'Auth\LoginController@logout'); //TODO : remove me
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/profile', 'CommonController@profile')->name('profile');
+Route::post('/change_password', 'CommonController@change_password')->name('change_password');
 
 
 
@@ -33,6 +34,13 @@ Route::prefix('/sys_admin')->group(function () {
     Route::post('/add_course', 'SysAdminController@add_course')->name('sys_admin.add_course');
     Route::post('/add_handler', 'SysAdminController@add_handler')->name('sys_admin.add_handler');
     Route::post('/add_position', 'SysAdminController@add_position')->name('sys_admin.add_position');
+
+
+    Route::put('/update_handler', 'SysAdminController@update_handler')->name('sys_admin.update_handler');
+    Route::put('/edit_position', 'SysAdminController@edit_position')->name('sys_admin.edit_position');
+    Route::put('/edit_course', 'SysAdminController@edit_course')->name('sys_admin.edit_course');
+    Route::put('/edit_lecturer', 'SysAdminController@edit_lecturer')->name('sys_admin.edit_lecturer');
+    Route::put('/edit_student', 'SysAdminController@edit_student')->name('sys_admin.edit_student');
 
 });
 

@@ -53,6 +53,7 @@ class SysAdminController extends Controller
     {
        $request->validate([
           'fullname' => 'required',
+          'email'    => 'unique:users,email'
       ]);
 
 
@@ -74,6 +75,27 @@ class SysAdminController extends Controller
       return redirect()->back();
     }
 
+    public function edit_student(Request $request)
+    {
+
+          $request->validate([
+             'edit_student_email'    => 'unique:users,email'
+         ]);
+
+        $student =  Student::find($request->edit_id);
+        $user = User::find($student->user_id);
+
+        $user->email = $request->edit_student_email;
+        $user->name = $request->edit_student_name;
+        $user->update();
+
+        $student->student_id = $request->edit_student_id;
+        $student->update();
+
+        $request->session()->flash('success', 'Task was successful!');
+        return redirect()->back();
+    }
+
 
     public function lecturers()
     {
@@ -83,7 +105,10 @@ class SysAdminController extends Controller
 
     public function store_lecturer(Request $request)
     {
-      //TODO :validate
+
+      $request->validate([
+         'email'    => 'unique:users,email'
+       ]);
 
 
       $user = new User;
@@ -104,6 +129,25 @@ class SysAdminController extends Controller
       return redirect()->back();
     }
 
+    public function edit_lecturer(Request $request)
+    {
+
+      
+
+        $lecturer =  Lecturer::find($request->edit_id);
+        $user = User::find($lecturer->user_id);
+
+        $user->email = $request->edit_lecturer_email;
+        $user->name = $request->edit_lecturer_name;
+        $user->update();
+
+        $lecturer->lecturer_id = $request->edit_lecturer_id;
+        $lecturer->update();
+
+        $request->session()->flash('success', 'Task was successful!');
+        return redirect()->back();
+    }
+
     public function config()
     {
       $courses = Course::paginate(6);
@@ -116,7 +160,9 @@ class SysAdminController extends Controller
 
     public function add_course(Request $request)
     {
-      //TODO : validate duplicate
+      $request->validate([
+         'course_code'    => 'unique:courses,course_code'
+       ]);
 
       $course = new Course;
       $course->course_code = $request->course_code;
@@ -125,9 +171,27 @@ class SysAdminController extends Controller
       $request->session()->flash('success', 'Task was successful!');
       return redirect()->back();
     }
+
+    public function edit_course(Request $request)
+    {
+      $request->validate([
+         'course_code'    => 'unique:courses,course_code'
+       ]);
+
+      $course =  Course::find($request->edit_course_id);
+      $course->course_code = $request->edit_course_code;
+      $course->update();
+
+      $request->session()->flash('success', 'Task was successful!');
+      return redirect()->back();
+    }
+
+
     public function add_position(Request $request)
     {
-      //TODO : validate duplicate
+      $request->validate([
+         'position_title'    => 'unique:positions,title'
+       ]);
 
       $position = new Position;
       $position->title = $request->position_title;
@@ -135,6 +199,21 @@ class SysAdminController extends Controller
 
       $request->session()->flash('success', 'Task was successful!');
       return redirect()->back();
+    }
+
+    public function edit_position(Request $request)
+    {
+      $request->validate([
+         'position_title'    => 'unique:positions,title'
+       ]);
+
+        $position = Position::find($request->edit_position_id);
+        $position->title = $request->edit_position_title;
+        $position->update();
+
+        $request->session()->flash('success', 'Task was successful!');
+        return redirect()->back();
+
     }
 
     public function add_handler(Request $request)
@@ -157,5 +236,18 @@ class SysAdminController extends Controller
 
        $request->session()->flash('error', 'Task Failed!');
         return redirect()->back();
+      }
+
+      public function update_handler(Request $request)
+      {
+          $handler = ComplaintHandler::find($request->complaint_id);
+
+          $handler->lecturer_id = $request->lecturer_id;
+          $handler->position_id = $request->position_id;
+          $handler->update();
+
+          // Session::flash('success',"Update successful");
+          $request->session()->flash('success', 'Task was successful!');
+          return redirect()->back();
       }
 }

@@ -42,8 +42,8 @@
               <div class="col-md-2 col-12 pb-4 text-center" style="{{ isActiveRoute(['lecturer.complaints']) }}">
                 <a href="{{ route('lecturer.complaints')}}" class="h5 text-light">COMPLAINTS</a>
               </div>
-              <div class="col-md-2 col-12 pb-4 text-center" style="{{ isActiveRoute(['lecturer.profile']) }}">
-                <a href="{{ route('lecturer.profile')}}" class="h5 text-light">PROFILE</a>
+              <div class="col-md-2 col-12 pb-4 text-center" style="{{ isActiveRoute(['profile']) }}">
+                <a href="{{ route('profile')}}" class="h5 text-light">PROFILE</a>
               </div>
           </div>
 
@@ -58,7 +58,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" ></script>
-    {{-- <script src="{{ asset('js/bootstrap-notify.js') }}" ></script> --}}
     @yield('scripts')
 </body>
 </html>
